@@ -17,6 +17,7 @@ namespace ConsoleApp
             var dishDbManager = new DishManager(Configuration);
 
             Console.WriteLine("Test GIT");
+            Console.WriteLine("Test commit on develop branch");
             Console.WriteLine("Customer [C], Deliveryman [D]");
             string customerDeliverymanChoice = Console.ReadLine();
 
