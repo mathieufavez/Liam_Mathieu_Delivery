@@ -16,7 +16,7 @@ namespace ConsoleApp
             var deliveryDbManager = new DeliveryManager(Configuration);
             var dishDbManager = new DishManager(Configuration);
 
-
+            Console.WriteLine("Test GIT");
             Console.WriteLine("Customer [C], Deliveryman [D]");
             string customerDeliverymanChoice = Console.ReadLine();
 
