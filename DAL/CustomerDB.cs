@@ -123,11 +123,14 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT into Customer(name) values(@name); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT into Customer(Name, LastName, Address, Login, Password, FK_idCity) values (@name, @lastname, @address, @login, @password, @fkidcity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
-
-
+                    cmd.Parameters.AddWithValue("@lastname", customer.LastName);
+                    cmd.Parameters.AddWithValue("@address", customer.Address);
+                    cmd.Parameters.AddWithValue("@login", customer.Login);
+                    cmd.Parameters.AddWithValue("@password", customer.Password);
+                    cmd.Parameters.AddWithValue("@fkidcity", customer.FK_idCity);
                     cn.Open();
 
                     customer.IdCustomer = Convert.ToInt32(cmd.ExecuteScalar());
