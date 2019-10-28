@@ -15,8 +15,9 @@ namespace ConsoleApp
             var restaurantDbManager = new RestaurantManager(Configuration);
             var deliveryDbManager = new DeliveryManager(Configuration);
             var dishDbManager = new DishManager(Configuration);
+            var orderDbManager = new OrderManager(Configuration);
+            var cityDbManager = new CityManager(Configuration);
 
-            Console.WriteLine("Test GIT Liam");
             Console.WriteLine("Customer [C], Deliveryman [D]");
             string customerDeliverymanChoice = Console.ReadLine();
 
@@ -45,6 +46,8 @@ namespace ConsoleApp
 
                     Console.WriteLine("Connection successful");
 
+                    Console.WriteLine("Restaurants list : ");
+
                     var restaurants = restaurantDbManager.GetAllRestaurants();
 
                     foreach (var restaurant in restaurants)
@@ -52,22 +55,70 @@ namespace ConsoleApp
                         Console.WriteLine(restaurant.ToString());
                     }
 
-                    Console.WriteLine("Choose the restaurant");
-                    string idRestaurant = Console.ReadLine();
-                    if (idRestaurant == restaurantDbManager.GetRestaurantDishes(int.Parse(idRestaurant)))
+                    Console.WriteLine("[1] New order, [2] Cancel order");
+                    string orderChoice = Console.ReadLine();
+                    if (orderChoice == "1")
                     {
-                        var dishes = dishDbManager.GetAllDishes(idRestaurant);
+                        Console.WriteLine("Choose the restaurant");
+                        string idRestaurant = Console.ReadLine();
+                        if (idRestaurant == restaurantDbManager.GetRestaurantDishes(int.Parse(idRestaurant)))
+                        {
+                            var dishes = dishDbManager.GetAllDishes(idRestaurant);
+                        }
+
                     }
+                    else
+                    {
+                        Console.WriteLine("Choose the order you want to cancel : ");
+                        orderDbManager.GetAllOrders(int.Parse(idCustomer); //Display all the orders the customer in question has currently
+                        Console.WriteLine("Do you want to cancel this order ? Yes [Y], No[N]" + orderDbManager.GetOrder(idOrder));
+                        string cancelChoice = Console.ReadLine();
+                        if (cancelChoice == "Y")
+                        {
+                            Console.WriteLine("Insert your cancellation code (2 first letters of your lastname+first letter of your firstname "+orderDbManager.getIdOrder());
+                            string cancellationCode = Console.ReadLine();
+                            if (cancellationCode == getCancellationCode())
+                                orderDbManager.changeOrderStatusToCanceled(idOrder);
+                            Console.WriteLine("Order : " + orderDbManager.GetOrder(idOrder) +" successfuly canceled !");
+
+                        }
+                        else 
+                        {
+                            Console.WriteLine("End");
+                        }
+
+                    }
+
+
+                    
+                }
+                else 
+                {
+                    Console.WriteLine("New registration !");
+
+                    Console.WriteLine("Name : ");
+                    string nameNewCustomer = Console.ReadLine();
+                    Console.WriteLine("Lastname : ");
+                    string lastNameNewCustomer = Console.ReadLine();
+                    Console.WriteLine("Address : ");
+                    string addressNewCustomer = Console.ReadLine();
+                    cityDbManager.GetAllCities();
+                    Console.WriteLine("Insérer l'ID de la ville dans laquelle vous habitez");
+                    string idCityNewCustomer= Console.ReadLine();
+                    Console.WriteLine("Login : ");
+                    string LoginNewCustomer = Console.ReadLine();
+                    Console.WriteLine("Password : ");
+                    string PasswordNewCustomer = Console.ReadLine();
+                    customerDbManager.AddCustomer(nameNewCustomer, lastNameNewCustomer, addressNewCustomer, LoginNewCustomer, PasswordNewCustomer, idCityNewCustomer);
+
+                    Console.WriteLine("Congratulations, your account has been created ! You can now start ordering food !");
+
                 }
             }
             else
             {
-                var deliverymans = deliverymanDbManager.GetAllDeliveryman();
+                Console.WriteLine("Welcome to the delivery management");
 
-                foreach (var deliveryman in deliverymans)
-                {
-                    Console.WriteLine(deliveryman.ToString());
-                }
                 Console.WriteLine("Username");
                 string usernameD = Console.ReadLine();
 
@@ -87,14 +138,16 @@ namespace ConsoleApp
 
                 Console.WriteLine("Connection successful");
 
-                Console.WriteLine("Choose the delivery");
-                var deliverys = deliveryDbManager.GetAllDelivery(); //En fonction de l'id du deliveryman
+                Console.WriteLine("Which delivery have you done ? Insert the ID");
+                
+                var deliverys = deliveryDbManager.GetAllDelivery(idDeliveryman); //En fonction de l'id du deliveryman
                 foreach (var delivery in deliverys)
                 {
                     Console.WriteLine(delivery.ToString());
-
                 }
-
+                string deliveryDone = Console.ReadLine();
+                Console.WriteLine("Thank you ! The delivery " + deliveryDbManager.GetDelivery(idDelivery)+" has been successfully executed");
+                deliveryDbManager.changeStatusDeliveryToDone(idDelivery);
             }
 
         }
