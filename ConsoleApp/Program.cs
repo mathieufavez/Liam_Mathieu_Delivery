@@ -16,7 +16,7 @@ namespace ConsoleApp
             var deliveryDbManager = new DeliveryManager(Configuration);
             var dishDbManager = new DishManager(Configuration);
 
-            Console.WriteLine("Test GIT");
+            Console.WriteLine("Test GIT Liam");
             Console.WriteLine("Customer [C], Deliveryman [D]");
             string customerDeliverymanChoice = Console.ReadLine();
 
@@ -92,6 +92,7 @@ namespace ConsoleApp
                 foreach (var delivery in deliverys)
                 {
                     Console.WriteLine(delivery.ToString());
+
                 }
 
             }
