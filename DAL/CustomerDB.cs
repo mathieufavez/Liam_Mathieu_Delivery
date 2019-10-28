@@ -133,6 +133,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@fkidcity", customer.FK_idCity);
                     cn.Open();
 
+
                     customer.IdCustomer = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
