@@ -70,20 +70,21 @@ namespace DAL
             return results;
         }
 
-        //Trouver le customer en donnant son ID
-        public Customer GetCustomer(int id)
-        {
+        
 
-            Customer customer = null;
+        //Trouver le customer en donnant son login
+        public int GetIdCustomer(string login)
+        {
+            int idCustomer=0 ;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Customer WHERE Id = @id";
+                    string query = "Select Id from Customer WHERE login=@login";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("login", login);
 
                     cn.Open();
 
@@ -91,16 +92,8 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-
-                            customer.IdCustomer = (int)dr["Id"];
-                            customer.Name = (string)dr["name"];
-                            customer.LastName = (string)dr["lastName"];
-                            customer.Address = (string)dr["address"];
-                            customer.Login = (string)dr["login"];
-                            customer.Password = (string)dr["password"];
-                            customer.FK_idCity = (int)dr["FK_idCity"];
-                            customer.FK_idDelivery = (int)dr["FK_idDelivery"];
-
+                          
+                            idCustomer = (int)dr["Id"];
                         }
                     }
                 }
@@ -110,8 +103,41 @@ namespace DAL
             {
                 throw e;
             }
+            return idCustomer;
+        }
 
-            return customer;
+        public string GetPassword(int id, string login)
+        {
+            string password = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select password from Customer WHERE Id=@id AND login=@login";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("login", login);
+                    cmd.Parameters.AddWithValue("Id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            password = (string)dr["password"];
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return password;
         }
 
         public Customer AddCustomer(Customer customer)

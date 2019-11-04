@@ -17,7 +17,7 @@ namespace DAL
         }
 
         //Disply all the dishes
-        public List<Dish> GetAllDishes()
+        public List<Dish> GetAllDishes(int idRestaurant)
         {
             List<Dish> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -26,7 +26,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Dish";
+                    string query = "SELECT * FROM Dish WHERE FK_idRestaurant="+idRestaurant+";";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -44,8 +44,9 @@ namespace DAL
                             dish.Name = (string)dr["name"];
                             dish.Price = (int)dr["price"];
                             dish.Status = (string)dr["status"];
-                            dish.Created_at = (string)dr["created_at"];
                             dish.FK_idRestaurant = (int)dr["FK_idRestaurant"];
+
+
 
 
                             results.Add(dish);
@@ -129,6 +130,45 @@ namespace DAL
             return dish;
         }
 
+
+        public int GetDishPrice(int idDish)
+        {
+
+            int dishPrice = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select price from Dish WHERE Id = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", idDish);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                           
+                            dishPrice = (int)dr["price"];
+
+                         
+
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return dishPrice;
+        }
 
         //Update 1 Dish with his ID given
         public int UpdateDish(Dish dish)

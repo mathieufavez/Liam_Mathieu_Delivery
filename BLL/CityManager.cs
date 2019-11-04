@@ -36,5 +36,10 @@ namespace BLL
         {
             return CityDB.AddCity(city);
         }
+
+        public int GetIdCity(string nameCity, string zipCity) 
+        {
+            return CityDB.GetIdCity(nameCity, zipCity);
+        }
     }
 }

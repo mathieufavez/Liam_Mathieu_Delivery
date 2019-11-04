@@ -66,10 +66,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT into City(name) values(@name); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT into City(name, zip_code) values(@name, @zip_code); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", city.Name);
-               
+                    cmd.Parameters.AddWithValue("@zip_code", city.Zip_code);
+
 
                     cn.Open();
 
@@ -122,6 +123,46 @@ namespace DAL
             }
 
             return city;
+        }
+
+        public int GetIdCity(string nameCity, string zipCity)
+        {
+
+            int idCity=0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select Id from City WHERE name=@nameCity AND zip_code=@zipCity";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@nameCity", nameCity);
+                    cmd.Parameters.AddWithValue("@zipCity", zipCity);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                          
+                            idCity = (int)dr["Id"];
+
+                           
+
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return idCity;
         }
 
 

@@ -19,9 +19,16 @@ namespace BLL
             return DeliverymanDB.GetAllDeliveryman();
         }
 
-        public Deliveryman GetDeliveryman(int id)
+        public int GetIdDeliveryman(string login)
         {
-            return DeliverymanDB.GetDeliveryman(id);
+            return DeliverymanDB.GetIdDeliveryman(login);
+        }
+
+
+        public string GetPassword(int id, string login)
+        {
+
+            return DeliverymanDB.GetPassword(id, login);
         }
 
         public int UpdateDeliveryman(Deliveryman deliveryman)

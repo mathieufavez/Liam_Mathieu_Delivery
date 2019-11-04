@@ -11,12 +11,14 @@ namespace BLL
         ICustomerDB CustomerDB { get; }
         List<Customer> GetAllCustomers();
 
-        Customer GetCustomer(int id);
+        int GetIdCustomer(string login);
 
         int UpdateCustomer(Customer customer);
 
         int DeleteCustomer(int id);
 
         Customer AddCustomer(Customer customer);
+
+        string GetPassword(int id, string login);
     }
 }

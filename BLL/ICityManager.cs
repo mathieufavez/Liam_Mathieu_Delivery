@@ -17,5 +17,7 @@ namespace BLL
         int DeleteCity(int id);
 
         City AddCity(City city);
+
+        int GetIdCity(string nameCity, string zipCity);
     }
 }

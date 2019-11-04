@@ -12,12 +12,14 @@ namespace DAL
 
         List<Deliveryman> GetAllDeliveryman();
 
-        Deliveryman GetDeliveryman(int id);
+        int GetIdDeliveryman(string login);
 
         int UpdateDeliveryman(Deliveryman deliveryman);
 
         int DeleteDeliveryman(int id);
 
         Deliveryman AddDeliveryman(Deliveryman deliveryman);
+
+        string GetPassword(int id, string login);
     }
 }

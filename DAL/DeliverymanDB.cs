@@ -98,52 +98,77 @@ namespace DAL
                 return deliveryman;
             }
 
-            //Display 1 deliverman with his ID given
-            public Deliveryman GetDeliveryman(int id)
+        //Display 1 deliverman with his ID given
+        public int GetIdDeliveryman(string login)
+        {
+            int idCustomer = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
             {
-
-                Deliveryman deliveryman = null;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-                try
+                using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    using (SqlConnection cn = new SqlConnection(connectionString))
+                    string query = "Select Id from Deliveryman WHERE login=@login";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("login", login);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        string query = "Select * from Deliveryman WHERE Id = @id";
-                        SqlCommand cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@id", id);
-
-                        cn.Open();
-
-                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        if (dr.Read())
                         {
-                            if (dr.Read())
-                            {
 
-                                deliveryman.IdDeliveryman = (int)dr["Id"];
-                                deliveryman.LastName = (string)dr["lastname"];
-                                deliveryman.Address = (string)dr["address"];
-                                deliveryman.Login = (string)dr["login"];
-                                deliveryman.Password = (string)dr["password"];
-                                deliveryman.FK_idCity = (int)dr["FK_idCity"];
-                                deliveryman.FK_idDelivery = (int)dr["FK_idDelivery"];
-
-                            }
+                            idCustomer = (int)dr["Id"];
                         }
                     }
                 }
-
-                catch (Exception e)
-                {
-                    throw e;
-                }
-
-                return deliveryman;
             }
 
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return idCustomer;
+        }
 
-            //Update 1 deliveryman with his ID given
-            public int UpdateDeliveryman(Deliveryman deliveryman)
+        public string GetPassword(int id, string login)
+        {
+            string password = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select password from Deliveryman WHERE Id=@id AND login=@login";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("login", login);
+                    cmd.Parameters.AddWithValue("Id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            password = (string)dr["password"];
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return password;
+        }
+
+
+        //Update 1 deliveryman with his ID given
+        public int UpdateDeliveryman(Deliveryman deliveryman)
             {
                 int result = 0;
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -173,7 +198,7 @@ namespace DAL
 
 
             //Delete 1 deliveryman with his ID given
-            public int DeleteDeliveryman(int id)
+        public int DeleteDeliveryman(int id)
             {
                 int result = 0;
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");

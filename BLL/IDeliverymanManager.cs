@@ -16,5 +16,7 @@ namespace BLL
         int DeleteDeliveryman(int id);
 
         Deliveryman AddDeliveryman(Deliveryman deliveryman);
+
+        string GetPassword(int id, string login);
     }
 }

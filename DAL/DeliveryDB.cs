@@ -25,7 +25,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Delivery";
+                    string query = "SELECT * FROM Delivery WHERE ";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();

@@ -14,9 +14,9 @@ namespace BLL
         {
             DishDB = new DishDB(configuration);
         }
-        public List<Dish> GetAllDishes()
+        public List<Dish> GetAllDishes(int idRetaurant)
         {
-            return DishDB.GetAllDishes();
+            return DishDB.GetAllDishes(idRetaurant);
         }
 
         public Dish GetDish(int id)
@@ -36,6 +36,11 @@ namespace BLL
         public Dish AddDish(Dish dish)
         {
             return DishDB.AddDish(dish);
+        }
+
+        public int GetDishPrice(int idDish)
+        {
+            return DishDB.GetDishPrice(idDish);
         }
     }
 }

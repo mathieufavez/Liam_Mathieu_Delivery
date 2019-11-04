@@ -11,9 +11,11 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-        List<Dish> GetAllDishes();
+        List<Dish> GetAllDishes(int idRestaurant);
 
         Dish GetDish(int id);
+
+        int GetDishPrice(int idDish);
 
         int UpdateDish(Dish dish);
 

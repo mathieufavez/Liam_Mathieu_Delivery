@@ -7,7 +7,7 @@ namespace BLL
     public interface IDishManager
     {
         IDishDB DishDB { get; }
-        List<Dish> GetAllDishes();
+        List<Dish> GetAllDishes(int idRestaurant);
 
         Dish GetDish(int id);
 
@@ -16,5 +16,7 @@ namespace BLL
         int DeleteDish(int id);
 
         Dish AddDish(Dish dish);
+
+        int GetDishPrice(int idDish);
     }
 }
