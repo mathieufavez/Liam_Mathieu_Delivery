@@ -1,4 +1,6 @@
-﻿using DTO;
+﻿
+
+using DTO;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,8 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-     
+        List<Delivery_Time> GetAllDelivery_Time();
+
+        string GetDelivery_Time(int id);
     }
 }

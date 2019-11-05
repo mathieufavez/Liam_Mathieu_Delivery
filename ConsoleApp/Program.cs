@@ -47,6 +47,8 @@ namespace ConsoleApp
 
                         Console.WriteLine("Password");
                         passwordC = Console.ReadLine();
+
+                        idCustomerTryingToConnect = customerDbManager.GetIdCustomer(usernameC);
                     }
                     
                     Console.WriteLine("Connection successful");
@@ -157,6 +159,7 @@ namespace ConsoleApp
         {
             var restaurantDbManager = new RestaurantManager(Configuration);
             var dishDbManager = new DishManager(Configuration);
+            var delivery_TimeDbManager = new Delivery_TimeManager(Configuration);
 
             Console.WriteLine("[1] New order, [2] Cancel order");
             string orderChoice = Console.ReadLine();
@@ -197,14 +200,28 @@ namespace ConsoleApp
                 Console.WriteLine("The total of your command is : CHF "+dishPrice+".-");
 
                 Console.WriteLine("When do you want your order to be delivered ? Choose the time with the ID");
-                DateTime dateAndTime = DateTime.Now;
-                Console.WriteLine($"Short time string:  \"{dateAndTime.ToShortTimeString()}\"\n");
+               
 
+                var delivery_times = delivery_TimeDbManager.GetAllDelivery_Time();
+                foreach (var delivery_time in delivery_times)
+                {
+                    Console.WriteLine(delivery_time.ToString());
+                }
 
+                string deliveryTimeChoice = Console.ReadLine();
 
+                Console.WriteLine("Do you validate this order ? Yes [Y], No [N]");
+                string validationChoice = Console.ReadLine();
 
-
-
+                if (validationChoice == "Y")
+                {
+                    Console.WriteLine("Thank you for ordering with Liam & Mathieu Food Delivery !");
+                    Console.WriteLine("Your order will be there at "+ delivery_TimeDbManager.GetDelivery_Time(int.Parse(deliveryTimeChoice)));
+                }
+                else 
+                {
+                    Console.WriteLine("You canceled the order. See you soon !");
+                }
             }
         }
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
