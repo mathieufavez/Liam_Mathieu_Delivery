@@ -19,7 +19,6 @@ namespace ConsoleApp
             Console.WriteLine("Customer [C], Deliveryman [D]");
             string customerDeliverymanChoice = Console.ReadLine();
 
-           
 
             if (customerDeliverymanChoice == "C")
             {
