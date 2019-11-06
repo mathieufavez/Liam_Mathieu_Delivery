@@ -182,9 +182,47 @@ namespace DAL
 
             return result;
         }
+        //Get all orders for one customer with the customer id
+        public List<Order> GetAllOrdersForOneCustomer(int idCustomer)
+        {
+            List<Order> results = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM [Order] WHERE FK_idCustomer=" + idCustomer + ";";
+                    SqlCommand cmd = new SqlCommand(query, cn);
 
+                    cn.Open();
 
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Order>();
+
+                            Order order = new Order();
+
+                            order.IdOrder = (int)dr["Id"];
+                            order.Status = (string)dr["status"];
+                            order.Order_number = (string)dr["order_number"];
+                            order.FK_idCustomer = (int)dr["FK_idCustomer"];
+
+                            results.Add(order);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
     }
 }
 

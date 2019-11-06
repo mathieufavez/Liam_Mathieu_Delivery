@@ -226,7 +226,37 @@ namespace DAL
 
             return result;
         }
+        public string Code(int id)
+        {
+            string result = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT *, CONCAT(LEFT(UPPER(lastName), 2), LEFT(name, 1)) AS Code FROM CUSTOMER WHERE Id=@id ; ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            result = (string)dr["Code"];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return result;
+        }
 
     }
 }

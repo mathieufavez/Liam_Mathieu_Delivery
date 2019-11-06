@@ -20,5 +20,7 @@ namespace BLL
         Customer AddCustomer(Customer customer);
 
         string GetPassword(int id, string login);
+
+        string Code(int id);
     }
 }

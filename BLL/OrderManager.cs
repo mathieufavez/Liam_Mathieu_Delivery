@@ -36,5 +36,9 @@ namespace BLL
         {
             return OrderDB.AddOrder(order);
         }
+        public List<Order> GetAllOrdersForOneCustomer(int idCustomer)
+        {
+            return OrderDB.GetAllOrdersForOneCustomer(idCustomer);
+        }
     }
 }

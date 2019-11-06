@@ -21,6 +21,7 @@ namespace DTO
         public int FK_idCity { get; set; }
 
         public int FK_idDelivery { get; set; }
+        public string Code { get; set; }
 
         public override string ToString()
         {
