@@ -192,9 +192,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM [Order] WHERE FK_idCustomer=" + idCustomer + ";";
+                    string query = "SELECT * FROM [Order] WHERE FK_idCustomer=@idCustomer";
                     SqlCommand cmd = new SqlCommand(query, cn);
-
+                    cmd.Parameters.AddWithValue("@idCustomer", idCustomer);
                     cn.Open();
 
                     using (SqlDataReader dr = cmd.ExecuteReader())

@@ -52,30 +52,6 @@ namespace ConsoleApp
                     Console.WriteLine("Connection successful");
 
                     Program.Suite(idCustomerTryingToConnect);
-                  
-                    /*
-                    else
-                    {
-                        Console.WriteLine("Choose the order you want to cancel : ");
-                        orderDbManager.GetAllOrders(int.Parse(idCustomer); //Display all the orders the customer in question has currently
-                        Console.WriteLine("Do you want to cancel this order ? Yes [Y], No[N]" + orderDbManager.GetOrder(idOrder));
-                        string cancelChoice = Console.ReadLine();
-                        if (cancelChoice == "Y")
-                        {
-                            Console.WriteLine("Insert your cancellation code (2 first letters of your lastname+first letter of your firstname " + orderDbManager.getIdOrder());
-                            string cancellationCode = Console.ReadLine();
-                            if (cancellationCode == getCancellationCode())
-                                orderDbManager.changeOrderStatusToCanceled(idOrder);
-                            Console.WriteLine("Order : " + orderDbManager.GetOrder(idOrder) + " successfuly canceled !");
-
-                        }
-                        else
-                        {
-                            Console.WriteLine("End");
-                        }
-
-                    }
-                    */
 
 
                 }
