@@ -16,7 +16,7 @@ namespace DAL
         }
 
         //Disply all the delivery
-        public List<Delivery> GetAllDelivery()
+        public List<Delivery> GetAllDelivery(int deliverymanID)
         {
             List<Delivery> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -25,8 +25,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Delivery WHERE ";
+                    string query = "SELECT * FROM Delivery WHERE FK_idDeliveryman=@Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("Id", deliverymanID);
 
                     cn.Open();
 
@@ -40,9 +41,11 @@ namespace DAL
                             Delivery delivery = new Delivery();
 
                             delivery.IdDelivery = (int)dr["Id"];
-                            delivery.Created_at = (string)dr["created_at"];
+                            delivery.Created_at = (DateTime)dr["created_at"];
                             delivery.FK_idOrder = (int)dr["FK_idOrder"];
                             delivery.FK_idRestaurant = (int)dr["FK_idRestaurant"];
+                            delivery.FK_idDelivery_Time = (int)dr["FK_idDelivery_Time"];
+                            delivery.FK_idDeliveryman = (int)dr["FK_idDeliveryman"];
 
 
                             results.Add(delivery);
@@ -110,7 +113,7 @@ namespace DAL
                             delivery = new Delivery();
                             delivery.IdDelivery = (int)dr["Id"];
 
-                            delivery.Created_at = (string)dr["created_at"];
+                            delivery.Created_at = (DateTime)dr["created_at"];
 
                         }
                     }

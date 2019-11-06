@@ -10,7 +10,7 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-        List<Delivery> GetAllDelivery();
+        List<Delivery> GetAllDelivery(int deliverymanID);
 
         Delivery GetDelivery(int id);
 

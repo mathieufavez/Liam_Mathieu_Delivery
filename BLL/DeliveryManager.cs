@@ -13,9 +13,9 @@ namespace BLL
         {
             DeliveryDB = new DeliveryDB(configuration);
         }
-        public List<Delivery> GetAllDelivery()
+        public List<Delivery> GetAllDelivery(int deliverymanID)
         {
-            return DeliveryDB.GetAllDelivery();
+            return DeliveryDB.GetAllDelivery(deliverymanID);
         }
 
         public Delivery GetDelivery(int id)

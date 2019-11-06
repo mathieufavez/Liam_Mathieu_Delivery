@@ -141,16 +141,17 @@ namespace ConsoleApp
                 Console.WriteLine("Connection successful");
 
                 Console.WriteLine("Which delivery have you done ? Insert the ID");
-
                 
-                /*var deliverys = deliveryDbManager.GetAllDelivery(idDeliverymanTryingToConnect); //En fonction de l'id du deliveryman
+                var deliverys = deliveryDbManager.GetAllDelivery(idDeliverymanTryingToConnect); //En fonction de l'id du deliveryman
                 foreach (var delivery in deliverys)
                 {
                     Console.WriteLine(delivery.ToString());
+                    
                 }
+
                 string deliveryDone = Console.ReadLine();
-                Console.WriteLine("Thank you ! The delivery " + deliveryDbManager.GetDelivery(idDelivery) + " has been successfully executed");
-                deliveryDbManager.changeStatusDeliveryToDone(idDelivery);*/
+                Console.WriteLine("Thank you ! The delivery " + deliveryDbManager.GetDelivery(int.Parse(deliveryDone)) + " has been successfully executed");
+                //deliveryDbManager.changeStatusDeliveryToDone(idDelivery);
             }
 
         }
