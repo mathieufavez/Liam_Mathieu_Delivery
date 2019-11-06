@@ -158,6 +158,8 @@ namespace ConsoleApp
             var restaurantDbManager = new RestaurantManager(Configuration);
             var dishDbManager = new DishManager(Configuration);
             var delivery_TimeDbManager = new Delivery_TimeManager(Configuration);
+            var orderDbManager = new OrderManager(Configuration);
+            var customerDbManager = new CustomerManager(Configuration);
 
             Console.WriteLine("[1] New order, [2] Cancel order");
             string orderChoice = Console.ReadLine();
@@ -216,10 +218,28 @@ namespace ConsoleApp
                     Console.WriteLine("Thank you for ordering with Liam & Mathieu Food Delivery !");
                     Console.WriteLine("Your order will be there at "+ delivery_TimeDbManager.GetDelivery_Time(int.Parse(deliveryTimeChoice)));
                 }
+
                 else 
                 {
                     Console.WriteLine("You canceled the order. See you soon !");
                 }
+            }
+            else
+            {
+                
+                Console.WriteLine("Here is the list of your orders : ");
+
+                var orders = orderDbManager.GetAllOrdersForOneCustomer(idCustomer);
+
+                foreach (var order in orders)
+                {
+                    Console.WriteLine(order.ToString());
+                }
+
+                Console.WriteLine("Choose the order you want to delete with the id");
+                string orderDelete = Console.ReadLine();
+                var code = customerDbManager.Code(idCustomer) + orderDelete;
+                Console.WriteLine("Here is your cancellation code for the chosen order :" + ' ' + code);
             }
         }
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()

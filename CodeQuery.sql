@@ -1,0 +1,2 @@
+﻿SELECT *, CONCAT(LEFT(UPPER(lastName), 2), LEFT(name, 1)) AS Code 
+FROM CUSTOMER;

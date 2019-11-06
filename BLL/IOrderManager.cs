@@ -17,5 +17,7 @@ namespace BLL
         int DeleteOrder(int id);
 
         Order AddOrder(Order order);
+
+        List<Order> GetAllOrdersForOneCustomer(int idCustomer);
     }
 }

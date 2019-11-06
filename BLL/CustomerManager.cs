@@ -48,5 +48,9 @@ namespace BLL
         {
             return CustomerDB.AddCustomer(customer);
         }
+        public string Code(int id)
+        {
+            return CustomerDB.Code(id);
+        }
     }
 }
