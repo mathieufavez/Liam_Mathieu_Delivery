@@ -67,10 +67,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT into Order(name) values(@name); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT into [Order](status, FK_idCustomer) values(@status, @idCustomer); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", order.Status);
-
+                    cmd.Parameters.AddWithValue("@status", order.Status);
+                    cmd.Parameters.AddWithValue("@idCustomer", order.FK_idCustomer);
 
                     cn.Open();
 
@@ -85,20 +85,17 @@ namespace DAL
             return order;
         }
 
-        //Display 1 order with his ID given
-        public Order GetOrder(int id)
+        /*public int GetIdOrder()
         {
-
-            Order order = null;
+            int idOrder = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Order WHERE Id=@id";
+                    string query = "SELECT MAX(Id) FROM[Order]";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 
@@ -107,11 +104,7 @@ namespace DAL
                         if (dr.Read())
                         {
 
-                            order = new Order();
-                            order.IdOrder= (int)dr["Id"];
-
-                            order.Status = (string)dr["status"];
-
+                            idOrder = (int)dr["Id"];
                         }
                     }
                 }
@@ -121,9 +114,9 @@ namespace DAL
             {
                 throw e;
             }
+            return idOrder;
+        }*/
 
-            return order;
-        }
 
 
         //Update 1 order with his ID given
@@ -156,23 +149,62 @@ namespace DAL
         }
 
 
-        //Delete 1 Order with his ID given
-        public int DeleteOrder(int id)
+
+       /* public int GetIdOrder(string login)
         {
-            int result = 0;
+            int idCustomer = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Order WHERE Id=@id;";
+                    string query = "Select Id from Order WHERE login=@login";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("login", login);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            idCustomer = (int)dr["Id"];
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return idCustomer;
+        }*/
+
+        /*public string identificationOrder(int id)
+        {
+            string result = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT *, CONCAT(LEFT(UPPER(lastName), 2), LEFT(name, 1)) AS Code FROM CUSTOMER WHERE Id=@id ; ";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 
-                    result = cmd.ExecuteNonQuery();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            result = (string)dr["Code"];
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -181,7 +213,8 @@ namespace DAL
             }
 
             return result;
-        }
+        }*/
+
         //Get all orders for one customer with the customer id
         public List<Order> GetAllOrdersForOneCustomer(int idCustomer)
         {
@@ -208,7 +241,6 @@ namespace DAL
 
                             order.IdOrder = (int)dr["Id"];
                             order.Status = (string)dr["status"];
-                            order.Order_number = (string)dr["order_number"];
                             order.FK_idCustomer = (int)dr["FK_idCustomer"];
 
                             results.Add(order);

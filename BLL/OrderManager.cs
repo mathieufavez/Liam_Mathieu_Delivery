@@ -18,18 +18,9 @@ namespace BLL
             return OrderDB.GetAllOrders();
         }
 
-        public Order GetOrder(int id)
-        {
-            return OrderDB.GetOrder(id);
-        }
-
         public int UpdateOrder(Order order)
         {
             return OrderDB.UpdateOrder(order);
-        }
-        public int DeleteOrder(int id)
-        {
-            return OrderDB.DeleteOrder(id);
         }
 
         public Order AddOrder(Order order)

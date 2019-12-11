@@ -14,9 +14,9 @@ namespace BLL
         {
             DeliverymanDB = new DeliverymanDB(configuration);
         }
-        public List<Deliveryman> GetAllDeliveryman()
+        public List<Deliveryman> GetAllDeliveryman(int idCity)
         {
-            return DeliverymanDB.GetAllDeliveryman();
+            return DeliverymanDB.GetAllDeliveryman(idCity);
         }
 
         public int GetIdDeliveryman(string login)
@@ -35,11 +35,7 @@ namespace BLL
         {
             return DeliverymanDB.UpdateDeliveryman(deliveryman);
         }
-        public int DeleteDeliveryman(int id)
-        {
-            return DeliverymanDB.DeleteDeliveryman(id);
-        }
-
+      
         public Deliveryman AddDeliveryman(Deliveryman deliveryman)
         {
             return DeliverymanDB.AddDeliveryman(deliveryman);

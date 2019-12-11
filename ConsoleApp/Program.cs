@@ -37,7 +37,9 @@ namespace ConsoleApp
 
                     //En fonction de l'id du customer
                     while ( passwordC != customerDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
-                    { 
+                    {
+
+                        Console.WriteLine(passwordC);
                         Console.WriteLine("Connection denied. Try again");
 
                         Console.WriteLine("Username");
@@ -120,7 +122,6 @@ namespace ConsoleApp
                 foreach (var delivery in deliverys)
                 {
                     Console.WriteLine(delivery.ToString());
-                    
                 }
 
                 string deliveryDone = Console.ReadLine();
@@ -137,6 +138,9 @@ namespace ConsoleApp
             var delivery_TimeDbManager = new Delivery_TimeManager(Configuration);
             var orderDbManager = new OrderManager(Configuration);
             var customerDbManager = new CustomerManager(Configuration);
+            var deliveryDbManager = new DeliveryManager(Configuration);
+            var orderDishDbManager = new Order_DishManager(Configuration);
+            var deliverymanDbMangager = new DeliverymanManager(Configuration);
 
             Console.WriteLine("[1] New order, [2] Cancel order");
             string orderChoice = Console.ReadLine();
@@ -167,14 +171,34 @@ namespace ConsoleApp
 
                 int dishPrice = dishDbManager.GetDishPrice(int.Parse(dishChoice));
 
-                while (dishChoice != "0")
+                Console.WriteLine("How many times do you want this dish ?");
+                string dishQuantity = Console.ReadLine();
+
+                int totalPrice = dishPrice * int.Parse(dishQuantity);
+
+                var newOrder = orderDbManager.AddOrder(new Order { Status = "In procedure", FK_idCustomer = idCustomer });
+
+                orderDishDbManager.AddOrder_Dish(new Order_Dish { Quantity = dishQuantity, FK_idDish = int.Parse(dishChoice), FK_idOrder = newOrder.IdOrder});
+
+                //Sans plusieurs ordres, ça fonctionne
+                /*while (dishChoice != "0")
                 {
                     Console.WriteLine("Would you like something else ? If your order is done, insert [0]");
                     dishChoice = Console.ReadLine();
-                    dishPrice += dishDbManager.GetDishPrice(int.Parse(dishChoice));
-                }
+                    dishPrice = dishDbManager.GetDishPrice(int.Parse(dishChoice));
 
-                Console.WriteLine("The total of your command is : CHF "+dishPrice+".-");
+                    if (dishChoice != "0")
+                    {
+                        Console.WriteLine("How many times do you want this dish ?");
+                        dishQuantity = Console.ReadLine();
+                        totalPrice += dishPrice * int.Parse(dishQuantity);
+                    }
+
+                    //Bug ici à corriger
+                    orderDishDbManager.AddOrder_Dish(new Order_Dish { Quantity = dishQuantity, FK_idDish = int.Parse(dishChoice), FK_idOrder = newOrder.IdOrder});
+                }*/
+
+                Console.WriteLine("The total of your command is : CHF "+ totalPrice + ".-");
 
                 Console.WriteLine("When do you want your order to be delivered ? Choose the time with the ID");
                
@@ -194,6 +218,19 @@ namespace ConsoleApp
                 {
                     Console.WriteLine("Thank you for ordering with Liam & Mathieu Food Delivery !");
                     Console.WriteLine("Your order will be there at "+ delivery_TimeDbManager.GetDelivery_Time(int.Parse(deliveryTimeChoice)));
+                    
+
+                    int idCityFromRestaurant = restaurantDbManager.GetidCityFromRestaurant(int.Parse(idRestaurant));
+
+                    var deliverymans = deliverymanDbMangager.GetAllDeliveryman(idCityFromRestaurant);
+
+                    foreach (var deliveryman in deliverymans)
+                    {
+                        //if(deliveryman.FK_idDelivery<5 && deliveryman.)
+                    }
+
+                    deliveryDbManager.AddDelivery(new Delivery { FK_idOrder = newOrder.IdOrder, FK_idRestaurant = int.Parse(idRestaurant), FK_idDelivery_Time = int.Parse(deliveryTimeChoice) });
+                  
                 }
 
                 else 
@@ -217,6 +254,21 @@ namespace ConsoleApp
                 string orderDelete = Console.ReadLine();
                 var code = customerDbManager.Code(idCustomer) + orderDelete;
                 Console.WriteLine("Here is your cancellation code for the chosen order :" + ' ' + code);
+                Console.WriteLine("Insert you cancellation code :");
+                string codeInserted = Console.ReadLine();
+                while (codeInserted != code) 
+                {
+                    Console.WriteLine("Cancellation code wrong. Try again.");
+                    codeInserted=Console.ReadLine();
+                }
+                Console.WriteLine("Are you sure you want to cancel this order ? Yes [Y], No [N]");
+                string choice = Console.ReadLine();
+                if (choice == "Y") 
+                {
+                    //Change status order
+                    Console.WriteLine("Your order has been successfully cancelled !");
+                }
+                Console.WriteLine("Your order has not been cancelled");
             }
         }
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()

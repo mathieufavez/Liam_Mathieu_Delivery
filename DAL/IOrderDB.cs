@@ -12,11 +12,7 @@ namespace DAL
 
         List<Order> GetAllOrders();
 
-        Order GetOrder(int id);
-
         int UpdateOrder(Order order);
-
-        int DeleteOrder(int id);
 
         Order AddOrder(Order order);
 

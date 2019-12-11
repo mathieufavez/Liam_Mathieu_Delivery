@@ -17,7 +17,7 @@ namespace DAL
             }
 
             //Disply all the deliveryman
-            public List<Deliveryman> GetAllDeliveryman()
+            public List<Deliveryman> GetAllDeliveryman(int idCity)
             {
                 List<Deliveryman> results = null;
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -26,10 +26,11 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "SELECT * FROM Deliveryman";
+                        string query = "SELECT * FROM Deliveryman WHERE FK_idCity=@idCity";
                         SqlCommand cmd = new SqlCommand(query, cn);
+                        cmd.Parameters.AddWithValue("@idCity", idCity);
 
-                        cn.Open();
+                    cn.Open();
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
@@ -51,11 +52,8 @@ namespace DAL
                                 if (dr["password"] != DBNull.Value)
                                     deliveryman.Password = (string)dr["password"];
 
-                                if (dr["FK_idCity"] != DBNull.Value)
-                                    deliveryman.FK_idCity = (int)dr["FK_idCity"];
-
-                                if (dr["FK_idDelivery"] != DBNull.Value)
-                                    deliveryman.FK_idDelivery = (int)dr["FK_idDelivery"];
+                            if (dr["FK_idCity"] != DBNull.Value)
+                                deliveryman.FK_idCity = (int)dr["FK_idCity"];
 
 
                                 results.Add(deliveryman);
@@ -197,35 +195,30 @@ namespace DAL
             }
 
 
-            //Delete 1 deliveryman with his ID given
-        public int DeleteDeliveryman(int id)
+        public int GetRightDeliveryman(int idRestaurant)
+        {
+            int result = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
             {
-                int result = 0;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-                try
+                using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    using (SqlConnection cn = new SqlConnection(connectionString))
-                    {
-                        string query = "DELETE FROM Deliveryman WHERE Id=@id;";
-                        SqlCommand cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@id", id);
+                    string query = "SELECT id FROM Deliveryman WHERE FK_idCity=@id;";
+                    SqlCommand cmd = new SqlCommand(query, cn);
 
-                        cn.Open();
+                    cn.Open();
 
-                        result = cmd.ExecuteNonQuery();
-                    }
+                    result = cmd.ExecuteNonQuery();
                 }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-
-                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
 
+            return result;
+        }
 
-
-        
     }
 }

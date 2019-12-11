@@ -14,7 +14,7 @@ namespace BLL
 
         int UpdateRestaurant(Restaurant restaurant);
 
-        int DeleteRestaurant(int id);
+        int GetidCityFromRestaurant(int idRestaurant);
 
         Restaurant AddRestaurant(Restaurant restaurant);
     }

@@ -10,13 +10,11 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-        List<Deliveryman> GetAllDeliveryman();
+        List<Deliveryman> GetAllDeliveryman(int idCity);
 
         int GetIdDeliveryman(string login);
 
         int UpdateDeliveryman(Deliveryman deliveryman);
-
-        int DeleteDeliveryman(int id);
 
         Deliveryman AddDeliveryman(Deliveryman deliveryman);
 

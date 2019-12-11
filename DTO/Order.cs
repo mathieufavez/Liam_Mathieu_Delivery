@@ -10,12 +10,11 @@ namespace DTO
         public string Status { get; set; }
 
         public string Created_at { get; set; }
-        public string Order_number { get; set; }
         public int FK_idCustomer { get; set; }
 
         public override string ToString()
         {
-            return $"{IdOrder}|{Status}|{Created_at}|{Order_number}|{FK_idCustomer}";
+            return $"{IdOrder}|{Status}|{Created_at}|{FK_idCustomer}";
         }
     }
 }

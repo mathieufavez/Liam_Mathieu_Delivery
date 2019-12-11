@@ -7,13 +7,12 @@ namespace BLL
     public interface IDeliverymanManager
     {
         IDeliverymanDB DeliverymanDB { get; }
-        List<Deliveryman> GetAllDeliveryman();
+        List<Deliveryman> GetAllDeliveryman(int idCity);
 
         Deliveryman GetDeliveryman(int id);
 
         int UpdateDeliveryman(Deliveryman deliveryman);
 
-        int DeleteDeliveryman(int id);
 
         Deliveryman AddDeliveryman(Deliveryman deliveryman);
 
