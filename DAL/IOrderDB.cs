@@ -8,8 +8,6 @@ namespace DAL
 {
     public interface IOrderDB
     {
-        IConfiguration Configuration { get; }
-
         List<Order> GetAllOrders();
 
         int UpdateOrder(Order order);

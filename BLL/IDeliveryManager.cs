@@ -7,7 +7,6 @@ namespace BLL
     public interface IDeliveryManager
     {
 
-        IDeliveryDB DeliveryDB { get; }
         List<Delivery> GetAllDelivery(int deliverymanID);
 
         Delivery GetDelivery(int id);

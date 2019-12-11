@@ -5,36 +5,36 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class Order_DishManager
+    public class Order_DishManager : IOrder_DishManager
     {
-        public IOrder_DishDB Order_DishDB { get; }
+        public IOrder_DishDB Order_DishDBObject { get; }
 
-        public Order_DishManager(IConfiguration configuration)
+        public Order_DishManager(IOrder_DishDB order_dishDB)
         {
-            Order_DishDB = new Order_DishDB(configuration);
+            Order_DishDBObject = order_dishDB;
         }
         public List<Order_Dish> GetAllOrder_Dish()
         {
-            return Order_DishDB.GetAllOrder_Dish();
+            return Order_DishDBObject.GetAllOrder_Dish();
         }
 
         public Order_Dish GetOrder_Dish(int id)
         {
-            return Order_DishDB.GetOrder_Dish(id);
+            return Order_DishDBObject.GetOrder_Dish(id);
         }
 
         public int UpdateOrder_Dish(Order_Dish order_Dish)
         {
-            return Order_DishDB.UpdateOrder_Dish(order_Dish);
+            return Order_DishDBObject.UpdateOrder_Dish(order_Dish);
         }
         public int DeleteOrder_Dish(int id)
         {
-            return Order_DishDB.DeleteOrder_Dish(id);
+            return Order_DishDBObject.DeleteOrder_Dish(id);
         }
 
         public Order_Dish AddOrder_Dish(Order_Dish order_Dish)
         {
-            return Order_DishDB.AddOrder_Dish(order_Dish);
+            return Order_DishDBObject.AddOrder_Dish(order_Dish);
         }
     }
 }

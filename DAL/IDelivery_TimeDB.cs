@@ -10,7 +10,6 @@ namespace DAL
 {
     public interface IDelivery_TimeDB
     {
-        IConfiguration Configuration { get; }
 
         List<Delivery_Time> GetAllDelivery_Time();
 

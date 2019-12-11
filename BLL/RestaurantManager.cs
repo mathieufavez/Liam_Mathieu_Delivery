@@ -5,37 +5,37 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class RestaurantManager
+    public class RestaurantManager : IRestaurantManager
     {
-        public IRestaurantDB RestaurantDB { get; }
+        public IRestaurantDB RestaurantDBObject { get; }
 
-        public RestaurantManager(IConfiguration configuration)
+        public RestaurantManager(IRestaurantDB restaurantDB) 
         {
-            RestaurantDB = new RestaurantDB(configuration);
+            RestaurantDBObject = restaurantDB;
         }
         public List<Restaurant> GetAllRestaurants()
         {
-            return RestaurantDB.GetAllRestaurants();
+            return RestaurantDBObject.GetAllRestaurants();
         }
 
         public int GetidCityFromRestaurant(int idRestaurant) 
         {
-            return RestaurantDB.GetidCityFromRestaurant(idRestaurant);
+            return RestaurantDBObject.GetidCityFromRestaurant(idRestaurant);
         }
 
         public Restaurant GetRestaurant(int id)
         {
-            return RestaurantDB.GetRestaurant(id);
+            return RestaurantDBObject.GetRestaurant(id);
         }
 
         public int UpdateRestaurant(Restaurant restaurant)
         {
-            return RestaurantDB.UpdateRestaurant(restaurant);
+            return RestaurantDBObject.UpdateRestaurant(restaurant);
         }
 
         public Restaurant AddRestaurant(Restaurant restaurant)
         {
-            return RestaurantDB.AddRestaurant(restaurant);
+            return RestaurantDBObject.AddRestaurant(restaurant);
         }
     }
 }

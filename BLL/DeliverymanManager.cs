@@ -6,13 +6,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class DeliverymanManager
+    public class DeliverymanManager : IDeliverymanManager
     {
         public IDeliverymanDB DeliverymanDB { get; }
 
-        public DeliverymanManager(IConfiguration configuration)
+        public DeliverymanManager(IDeliverymanDB deliverymanDB)
         {
-            DeliverymanDB = new DeliverymanDB(configuration);
+            DeliverymanDB = deliverymanDB;
         }
         public List<Deliveryman> GetAllDeliveryman(int idCity)
         {
@@ -23,7 +23,6 @@ namespace BLL
         {
             return DeliverymanDB.GetIdDeliveryman(login);
         }
-
 
         public string GetPassword(int id, string login)
         {
@@ -39,6 +38,11 @@ namespace BLL
         public Deliveryman AddDeliveryman(Deliveryman deliveryman)
         {
             return DeliverymanDB.AddDeliveryman(deliveryman);
+        }
+
+        public int GetRightDeliveryman(int idRestaurant)
+        {
+            return DeliverymanDB.GetRightDeliveryman(idRestaurant);
         }
     }
 }

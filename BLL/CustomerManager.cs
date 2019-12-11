@@ -5,13 +5,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class CustomerManager
+    public class CustomerManager : ICustomerManager
     {
         public ICustomerDB CustomerDB { get; }
 
-        public CustomerManager(IConfiguration configuration)
+        public CustomerManager(ICustomerDB customerDB)
         {
-            CustomerDB = new CustomerDB(configuration);
+            CustomerDB = customerDB;
         }
         public List<Customer> GetAllCustomers()
         {

@@ -9,17 +9,16 @@ namespace DAL
 {
     public class DeliveryDB : IDeliveryDB
     {
-        public IConfiguration Configuration { get; }
+        public string connectionString = null;
         public DeliveryDB(IConfiguration configuration)
         {
-            Configuration = configuration;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         //Disply all the delivery
         public List<Delivery> GetAllDelivery(int deliverymanID)
         {
             List<Delivery> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -64,7 +63,6 @@ namespace DAL
         public Delivery AddDelivery(Delivery delivery)
         {
 
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -93,7 +91,6 @@ namespace DAL
         {
 
             Delivery delivery = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -133,7 +130,6 @@ namespace DAL
         public int UpdateDelivery(Delivery delivery)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -163,7 +159,6 @@ namespace DAL
         public int DeleteDelivery(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

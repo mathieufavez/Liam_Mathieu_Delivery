@@ -7,7 +7,6 @@ namespace BLL
     public interface IOrderManager
     {
 
-        IOrderDB OrderDB { get; }
         List<Order> GetAllOrders();
 
         int UpdateOrder(Order order);

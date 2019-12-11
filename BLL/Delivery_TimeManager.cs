@@ -6,13 +6,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class Delivery_TimeManager
+    public class Delivery_TimeManager : IDelivery_TimeManager
     {
         public IDelivery_TimeDB Delivery_TimeDB { get; }
 
-        public Delivery_TimeManager(IConfiguration configuration)
+        public Delivery_TimeManager(IDelivery_TimeDB deliveryTimeDB)
         {
-            Delivery_TimeDB = new Delivery_TimeDB(configuration);
+            Delivery_TimeDB = deliveryTimeDB;
         }
         public List<Delivery_Time> GetAllDelivery_Time()
         {

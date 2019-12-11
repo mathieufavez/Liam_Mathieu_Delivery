@@ -8,7 +8,6 @@ namespace DAL
 {
     public interface IDeliverymanDB
     {
-        IConfiguration Configuration { get; }
 
         List<Deliveryman> GetAllDeliveryman(int idCity);
 
@@ -19,5 +18,8 @@ namespace DAL
         Deliveryman AddDeliveryman(Deliveryman deliveryman);
 
         string GetPassword(int id, string login);
+
+        int GetRightDeliveryman(int idRestaurant);
+
     }
 }

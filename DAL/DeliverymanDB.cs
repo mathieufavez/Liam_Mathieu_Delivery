@@ -9,98 +9,96 @@ namespace DAL
 {
     public class DeliverymanDB : IDeliverymanDB
     {
-      
-            public IConfiguration Configuration { get; }
-            public DeliverymanDB(IConfiguration configuration)
-            {
-                Configuration = configuration;
-            }
 
-            //Disply all the deliveryman
-            public List<Deliveryman> GetAllDeliveryman(int idCity)
-            {
-                List<Deliveryman> results = null;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+        public string connectionString = null;
 
-                try
+        public DeliverymanDB(IConfiguration configuration)
+        {
+            connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
+
+        //Disply all the deliveryman
+        public List<Deliveryman> GetAllDeliveryman(int idCity)
+        {
+            List<Deliveryman> results = null;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    using (SqlConnection cn = new SqlConnection(connectionString))
-                    {
-                        string query = "SELECT * FROM Deliveryman WHERE FK_idCity=@idCity";
-                        SqlCommand cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@idCity", idCity);
+                    string query = "SELECT * FROM Deliveryman WHERE FK_idCity=@idCity";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@idCity", idCity);
 
                     cn.Open();
 
-                        using (SqlDataReader dr = cmd.ExecuteReader())
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
                         {
-                            while (dr.Read())
-                            {
-                                if (results == null)
-                                    results = new List<Deliveryman>();
+                            if (results == null)
+                                results = new List<Deliveryman>();
 
-                                Deliveryman deliveryman = new Deliveryman();
+                            Deliveryman deliveryman = new Deliveryman();
 
-                                deliveryman.IdDeliveryman = (int)dr["Id"];
-                                deliveryman.Name = (string)dr["name"];
-                                deliveryman.LastName = (string)dr["lastname"];
-                                deliveryman.Address = (string)dr["address"];
+                            deliveryman.IdDeliveryman = (int)dr["Id"];
+                            deliveryman.Name = (string)dr["name"];
+                            deliveryman.LastName = (string)dr["lastname"];
+                            deliveryman.Address = (string)dr["address"];
 
-                                if (dr["login"] != DBNull.Value)
-                                    deliveryman.Login = (string)dr["login"];
+                            if (dr["login"] != DBNull.Value)
+                                deliveryman.Login = (string)dr["login"];
 
-                                if (dr["password"] != DBNull.Value)
-                                    deliveryman.Password = (string)dr["password"];
+                            if (dr["password"] != DBNull.Value)
+                                deliveryman.Password = (string)dr["password"];
 
                             if (dr["FK_idCity"] != DBNull.Value)
                                 deliveryman.FK_idCity = (int)dr["FK_idCity"];
 
 
-                                results.Add(deliveryman);
-                            }
+                            results.Add(deliveryman);
                         }
                     }
                 }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-
-                return results;
             }
-
-            public Deliveryman AddDeliveryman(Deliveryman deliveryman)
+            catch (Exception e)
             {
-
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-                try
-                {
-                    using (SqlConnection cn = new SqlConnection(connectionString))
-                    {
-                        string query = "INSERT into Deliveryman(name, lastName, address, login, password, FK_iDCity, FK_idDelivery) values(@name,@lastName,@address,@login,@password,@FK_iDCity,@FK_idDelivery); SELECT SCOPE_IDENTITY()";
-                        SqlCommand cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@name", deliveryman.Name);
-
-
-                        cn.Open();
-
-                        deliveryman.IdDeliveryman = Convert.ToInt32(cmd.ExecuteScalar());
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-
-                return deliveryman;
+                throw e;
             }
+
+            return results;
+        }
+
+        public Deliveryman AddDeliveryman(Deliveryman deliveryman)
+        {
+
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "INSERT into Deliveryman(name, lastName, address, login, password, FK_iDCity, FK_idDelivery) values(@name,@lastName,@address,@login,@password,@FK_iDCity,@FK_idDelivery); SELECT SCOPE_IDENTITY()";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@name", deliveryman.Name);
+
+
+                    cn.Open();
+
+                    deliveryman.IdDeliveryman = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return deliveryman;
+        }
 
         //Display 1 deliverman with his ID given
         public int GetIdDeliveryman(string login)
         {
             int idCustomer = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -133,7 +131,6 @@ namespace DAL
         public string GetPassword(int id, string login)
         {
             string password = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -167,38 +164,36 @@ namespace DAL
 
         //Update 1 deliveryman with his ID given
         public int UpdateDeliveryman(Deliveryman deliveryman)
+        {
+            int result = 0;
+
+            try
             {
-                int result = 0;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-                try
+                using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    using (SqlConnection cn = new SqlConnection(connectionString))
-                    {
-                        string query = "UPDATE Deliveryman set name=@name WHERE Id=@id;";
-                        SqlCommand cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@id", deliveryman.IdDeliveryman);
-                        cmd.Parameters.AddWithValue("@name", deliveryman.Name);
+                    string query = "UPDATE Deliveryman set name=@name WHERE Id=@id;";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", deliveryman.IdDeliveryman);
+                    cmd.Parameters.AddWithValue("@name", deliveryman.Name);
 
 
-                        cn.Open();
+                    cn.Open();
 
-                        result = cmd.ExecuteNonQuery();
-                    }
+                    result = cmd.ExecuteNonQuery();
                 }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-
-                return result;
             }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return result;
+        }
 
 
         public int GetRightDeliveryman(int idRestaurant)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

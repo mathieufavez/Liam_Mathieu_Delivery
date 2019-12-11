@@ -10,16 +10,15 @@ namespace DAL
     public class Delivery_TimeDB : IDelivery_TimeDB
     {
 
-        public IConfiguration Configuration { get; }
+        public string connectionString = null;
         public Delivery_TimeDB(IConfiguration configuration)
         {
-            Configuration = configuration;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public List<Delivery_Time> GetAllDelivery_Time()
         {
             List<Delivery_Time> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -60,7 +59,6 @@ namespace DAL
         {
 
             string delivery_time = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

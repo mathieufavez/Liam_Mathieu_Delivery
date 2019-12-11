@@ -9,18 +9,17 @@ namespace DAL
 {
     public class CityDB : ICityDB
     {
-        
-        public IConfiguration Configuration { get; }
+
+        public string connectionString = null;
         public CityDB(IConfiguration configuration)
         {
-            Configuration = configuration;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         //Disply all the cities
         public List<City> GetAllCities()
         {
             List<City> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -60,7 +59,6 @@ namespace DAL
         public City AddCity(City city)
         {
 
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -90,7 +88,6 @@ namespace DAL
         {
 
             City city = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -129,7 +126,6 @@ namespace DAL
         {
 
             int idCity=0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -170,7 +166,6 @@ namespace DAL
         public int UpdateCity(City city)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -200,7 +195,6 @@ namespace DAL
         public int DeleteCity(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

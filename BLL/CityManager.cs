@@ -5,13 +5,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class CityManager
+    public class CityManager : ICityManager
     {
         public ICityDB CityDB { get; }
 
-        public CityManager(IConfiguration configuration)
+        public CityManager(ICityDB cityDB)
         {
-            CityDB = new CityDB(configuration);
+            CityDB = cityDB;
         }
         public List<City> GetAllCities()
         {

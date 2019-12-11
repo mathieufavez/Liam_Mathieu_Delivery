@@ -5,13 +5,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class DeliveryManager
+    public class DeliveryManager : IDeliveryManager
     {
         public IDeliveryDB DeliveryDB { get; }
 
-        public DeliveryManager(IConfiguration configuration)
+        public DeliveryManager(IDeliveryDB deliveryDB)
         {
-            DeliveryDB = new DeliveryDB(configuration);
+            DeliveryDB = deliveryDB;
         }
         public List<Delivery> GetAllDelivery(int deliverymanID)
         {

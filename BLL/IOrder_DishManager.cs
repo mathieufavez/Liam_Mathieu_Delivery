@@ -6,7 +6,6 @@ namespace BLL
 {
     public interface IOrder_DishManager
     {
-        IOrder_DishManager OrderDishDB { get; }
         List<Order_Dish> GetAllOrder_Dish();
 
         Order_Dish GetOrder_Dish(int id);

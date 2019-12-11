@@ -8,7 +8,6 @@ namespace DAL
 {
     public interface IDeliveryDB
     {
-        IConfiguration Configuration { get; }
 
         List<Delivery> GetAllDelivery(int deliverymanID);
 

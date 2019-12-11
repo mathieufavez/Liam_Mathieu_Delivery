@@ -9,7 +9,6 @@ namespace DAL
 {
     public interface IDishDB
     {
-        IConfiguration Configuration { get; }
 
         List<Dish> GetAllDishes(int idRestaurant);
 

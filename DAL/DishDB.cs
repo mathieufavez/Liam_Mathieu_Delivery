@@ -9,18 +9,16 @@ namespace DAL
 {
     public class DishDB : IDishDB
     {
-
-        public IConfiguration Configuration { get; }
+        public string connectionString = null;
         public DishDB(IConfiguration configuration)
         {
-            Configuration = configuration;
+            connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         //Disply all the dishes
         public List<Dish> GetAllDishes(int idRestaurant)
         {
             List<Dish> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -66,8 +64,6 @@ namespace DAL
         public Dish AddDish(Dish dish)
         {
 
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -95,7 +91,6 @@ namespace DAL
         {
 
             Dish dish = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -135,7 +130,6 @@ namespace DAL
         {
 
             int dishPrice = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -174,7 +168,6 @@ namespace DAL
         public int UpdateDish(Dish dish)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -204,7 +197,6 @@ namespace DAL
         public int DeleteDish(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

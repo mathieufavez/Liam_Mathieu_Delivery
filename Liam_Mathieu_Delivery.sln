@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{5CEBE1A6-E916-404E-9C26-3CCED5717415}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{5463DA52-3465-4222-B825-B61A1DE64213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{5463DA52-3465-4222-B825-B61A1DE64213}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{FBCBA9BC-7D0D-442D-BFA5-AD5B5B6AF05C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{FBCBA9BC-7D0D-442D-BFA5-AD5B5B6AF05C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{BF8EBF0D-02AC-4D6D-BDFB-74EC1D3C614D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{FBCBA9BC-7D0D-442D-BFA5-AD5B5B6AF05C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBCBA9BC-7D0D-442D-BFA5-AD5B5B6AF05C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBCBA9BC-7D0D-442D-BFA5-AD5B5B6AF05C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF8EBF0D-02AC-4D6D-BDFB-74EC1D3C614D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF8EBF0D-02AC-4D6D-BDFB-74EC1D3C614D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF8EBF0D-02AC-4D6D-BDFB-74EC1D3C614D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF8EBF0D-02AC-4D6D-BDFB-74EC1D3C614D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
