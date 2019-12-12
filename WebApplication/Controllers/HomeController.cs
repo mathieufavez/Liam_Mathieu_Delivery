@@ -17,20 +17,15 @@ namespace WebApplication.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Tout ce qu'il y a à savoir sur notre entreprise ! ";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "N'hésitez pas à nous contacter";
 
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
             return View();
         }
 
