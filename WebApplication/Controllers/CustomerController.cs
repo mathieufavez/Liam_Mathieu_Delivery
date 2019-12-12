@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DAL;
 using BLL;
+using DTO;
 
 namespace WebApplication.Controllers
 {
@@ -24,20 +25,24 @@ namespace WebApplication.Controllers
             return View();
         }
 
-       /* [HttpPost]
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Connexion(Customer customer)
         {
-            bool isValid = LoginManager.IsUserValid(l);
-            if (isValid)
+
+            int idCustomer = CustomerManager.GetIdCustomer(customer.Login);
+            string password = CustomerManager.GetPassword(idCustomer, customer.Login);
+            if (customer.Password == password)
             {
-                HttpContext.Session.SetString("Username", l.Username);
-                return RedirectToAction("GetHotels", "Hotel", new { isValid = isValid, user = "Antoine" });
+                HttpContext.Session.SetString("Login", customer.Login);
+                return RedirectToAction("ListeRestaurant", "Restaurant", new { id = idCustomer });
             }
+
             else
             {
+
                 return View();
             }
-        }*/
+        }
 
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DAL;
 using BLL;
+using DTO;
 
 namespace WebApplication.Controllers
 {
@@ -13,11 +14,12 @@ namespace WebApplication.Controllers
     {
 
         private IDeliverymanManager DeliverymanManager { get; }
-
+      
         public DeliverymanController(IDeliverymanManager deliverymanManager)
         {
             DeliverymanManager = deliverymanManager;
         }
+
 
         [HttpGet]
         public IActionResult Connexion()
@@ -26,13 +28,15 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(int id, string login)
+        public IActionResult Connexion(Deliveryman deliveryman)
         {
-            string password = DeliverymanManager.GetPassword(id,login);
-            if (password == DeliverymanManager.GetPassword(id, login))
+
+            int idDeliveryman = DeliverymanManager.GetIdDeliveryman(deliveryman.Login);
+            string password = DeliverymanManager.GetPassword(idDeliveryman, deliveryman.Login);
+            if (deliveryman.Password == password)
             {
-                HttpContext.Session.SetString("Login", login);
-                return RedirectToAction("GetHotels", "Hotel", new {  user = login });
+                HttpContext.Session.SetString("Login", deliveryman.Login);
+                return RedirectToAction("ListeCities", "City", new { id = idDeliveryman });
             }
 
             else
