@@ -51,6 +51,14 @@ namespace WebApplication
             services.AddScoped<IDeliverymanManager, DeliverymanManager>();
             services.AddScoped<IDeliverymanDB, DeliverymanDB>();
 
+            //Ajout Delivery
+            services.AddScoped<IDeliveryManager, DeliveryManager>();
+            services.AddScoped<IDeliveryDB, DeliveryDB>();
+
+            //Ajout Dish
+            services.AddScoped<IDishManager, DishManager>();
+            services.AddScoped<IDishDB, DishDB>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

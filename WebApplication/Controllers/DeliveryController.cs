@@ -17,7 +17,13 @@ namespace WebApplication.Controllers
         public DeliveryController(IDeliveryManager deliveryManager)
         {
             DeliveryManager = deliveryManager;
-            
+        }
+
+        public ActionResult ListeDeliverys(int idDeliveryman) 
+        {
+            idDeliveryman = HttpContext.Session.GetInt32("IdDeliveryman").GetValueOrDefault();
+            var deliverys = DeliveryManager.GetAllDelivery(idDeliveryman);
+            return View(deliverys);
         }
 
     }

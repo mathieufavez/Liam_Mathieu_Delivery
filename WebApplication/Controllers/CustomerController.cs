@@ -33,14 +33,15 @@ namespace WebApplication.Controllers
             string password = CustomerManager.GetPassword(idCustomer, customer.Login);
             if (customer.Password == password)
             {
-                HttpContext.Session.SetString("Login", customer.Login);
+
+                HttpContext.Session.SetInt32("IdCustomer", idCustomer);
                 return RedirectToAction("ListeRestaurant", "Restaurant", new { id = idCustomer });
             }
 
             else
             {
 
-                return View();
+                return View( );
             }
         }
 

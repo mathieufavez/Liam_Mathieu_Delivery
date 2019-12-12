@@ -30,15 +30,13 @@ namespace WebApplication.Controllers
         [HttpPost]
         public IActionResult Connexion(Deliveryman deliveryman)
         {
-
             int idDeliveryman = DeliverymanManager.GetIdDeliveryman(deliveryman.Login);
             string password = DeliverymanManager.GetPassword(idDeliveryman, deliveryman.Login);
             if (deliveryman.Password == password)
             {
-                HttpContext.Session.SetString("Login", deliveryman.Login);
-                return RedirectToAction("ListeCities", "City", new { id = idDeliveryman });
+                HttpContext.Session.SetInt32("IdDeliveryman", idDeliveryman);
+                return RedirectToAction("ListeDeliverys", "Delivery", new { id = idDeliveryman });
             }
-
             else
             {
                 return View();

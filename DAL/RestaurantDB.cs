@@ -90,7 +90,7 @@ namespace DAL
         public Restaurant GetRestaurant(int id)
         {
 
-            Restaurant restaurant = null;
+            Restaurant restaurant = new Restaurant();
 
             try
             {

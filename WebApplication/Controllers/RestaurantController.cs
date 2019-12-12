@@ -28,5 +28,19 @@ namespace WebApplication.Controllers
             return View(restaurant);
         }
 
+        //Select the restaurant we chose
+        public ActionResult Select(int idRestaurant) 
+        {
+
+            HttpContext.Session.SetInt32("idRestaurant", idRestaurant);
+            var restaurant = RestaurantManager.GetRestaurant(idRestaurant);
+            return View(restaurant);
+        }
+
+        public ActionResult Continue() 
+        {
+            int idRestaurant= HttpContext.Session.GetInt32("idRestaurant").GetValueOrDefault();
+            return RedirectToAction("ListeDishes", "Dish", new { id = idRestaurant });
+        }
     }
 }

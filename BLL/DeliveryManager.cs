@@ -27,10 +27,6 @@ namespace BLL
         {
             return DeliveryDB.UpdateDelivery(delivery);
         }
-        public int DeleteDelivery(int id)
-        {
-            return DeliveryDB.DeleteDelivery(id);
-        }
 
         public Delivery AddDelivery(Delivery delivery)
         {

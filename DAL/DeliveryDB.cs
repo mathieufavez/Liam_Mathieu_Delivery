@@ -154,34 +154,5 @@ namespace DAL
             return result;
         }
 
-
-        //Delete 1 city with his ID given
-        public int DeleteDelivery(int id)
-        {
-            int result = 0;
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "DELETE FROM Delivery WHERE Id=@id;";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }
-
-
-
     }
 }

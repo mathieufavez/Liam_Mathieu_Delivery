@@ -15,8 +15,6 @@ namespace DAL
 
         int UpdateDelivery(Delivery delivery);
 
-        int DeleteDelivery(int id);
-
         Delivery AddDelivery(Delivery delivery);
     }
 }

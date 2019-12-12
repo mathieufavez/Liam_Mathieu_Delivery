@@ -17,11 +17,12 @@ namespace WebApplication.Controllers
             DishManager = dishManager;
         }
 
-        // GET: AllCities
-        public ActionResult ListeCities()
+        // GET: AllDishes for a restaurant
+        public ActionResult ListeDishes(int idRestaurant)
         {
-            int idRestaurant = 1;
-            var dishes = DishManager.GetAllDishes(1);
+
+            idRestaurant = HttpContext.Session.GetInt32("idRestaurant").GetValueOrDefault();
+            var dishes = DishManager.GetAllDishes(idRestaurant);
             return View(dishes);
         }
     }
