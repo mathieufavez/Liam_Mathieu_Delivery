@@ -70,11 +70,12 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT into Order_Dish(FK_idOrder, FK_idDish) values( @FK_idOrder, @FK_idDish); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT into Order_Dish(FK_idOrder, FK_idDish, quantity) values( @FK_idOrder, @FK_idDish, @quantity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     //cmd.Parameters.AddWithValue("@quantity", order_Dish.Quantity);
                     cmd.Parameters.AddWithValue("@FK_idOrder", order_Dish.FK_idOrder);
                     cmd.Parameters.AddWithValue("@FK_idDish", order_Dish.FK_idDish);
+                    cmd.Parameters.AddWithValue("@quantity", order_Dish.Quantity);
 
                     cn.Open();
 

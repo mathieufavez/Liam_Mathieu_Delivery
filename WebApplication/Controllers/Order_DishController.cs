@@ -34,9 +34,10 @@ namespace WebApplication.Controllers
 
         public ActionResult CreateOrder_Dish() 
         {
+            int quantite = HttpContext.Session.GetInt32("Quantite").GetValueOrDefault();
             int idDish = HttpContext.Session.GetInt32("IdDish").GetValueOrDefault();
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
-            Order_Dish newOrder_Dish = new Order_Dish {FK_idDish=idDish, FK_idOrder = idOrder };
+            Order_Dish newOrder_Dish = new Order_Dish {FK_idDish=idDish, FK_idOrder = idOrder, Quantity=quantite };
             Order_DishManager.AddOrder_Dish(newOrder_Dish);
             return RedirectToAction("ListOrder_Dish", "Order_Dish");
         }
@@ -52,13 +53,13 @@ namespace WebApplication.Controllers
             return View();
         }
 
-       /* [HttpPost]
+       [HttpPost]
         public IActionResult GetQuantity(Order_Dish order_dish)
         {
 
-            order_dish.Quantity = 
-            return View();
-        }*/
+            HttpContext.Session.SetInt32("Quantite", order_dish.Quantity);
+            return RedirectToAction("CreateOrder_Dish","Order_Dish");
+        }
 
 
     }

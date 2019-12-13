@@ -29,7 +29,7 @@ namespace WebApplication.Controllers
         public ActionResult Choix(int id) 
         {
             HttpContext.Session.SetInt32("IdDish",id);
-            return RedirectToAction("CreateOrder_Dish", "Order_Dish");
+            return RedirectToAction("GetQuantity", "Order_Dish");
         }
 
         

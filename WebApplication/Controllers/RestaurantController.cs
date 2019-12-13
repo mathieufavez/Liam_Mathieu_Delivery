@@ -54,7 +54,5 @@ namespace WebApplication.Controllers
             HttpContext.Session.SetInt32("IdRestaurant",id);
             return RedirectToAction("CreateOrder", "Order");
         }
-
-   
     }
 }
