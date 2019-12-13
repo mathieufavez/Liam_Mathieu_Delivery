@@ -9,7 +9,7 @@ namespace DTO
         public int IdOrder { get; set; }
         public string Status { get; set; }
 
-        public string Created_at { get; set; }
+        public DateTime Created_at { get; set; }
         public int FK_idCustomer { get; set; }
 
         public override string ToString()

@@ -21,14 +21,6 @@ namespace WebApplication.Controllers
             DishManager = dishManager;
         }
 
-        /*public ActionResult ListOrder_Dish()
-        {
-
-            int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
-            var order_dishes = Order_DishManager.GetAllOrder_Dish(idOrder);
-            return View(order_dishes);
-        }*/
-
         public ActionResult ListOrder_Dish()
         {
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
@@ -50,17 +42,6 @@ namespace WebApplication.Controllers
             return RedirectToAction("ListeDishes", "Dish");
         }
 
-       /* public ActionResult CreateOrder_Dish() 
-        {
-            int quantite = HttpContext.Session.GetInt32("Quantite").GetValueOrDefault();
-            int idDish = HttpContext.Session.GetInt32("IdDish").GetValueOrDefault();
-            int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
-
-            Order_Dish newOrder_Dish = new Order_Dish {FK_idDish=idDish, FK_idOrder = idOrder, Quantity=quantite };
-            Order_DishManager.AddOrder_Dish(newOrder_Dish);
-            return RedirectToAction("ListOrder_Dish", "Order_Dish");
-        }*/
-
         public ActionResult CreateOrder_Dish()
         {
             int quantite = HttpContext.Session.GetInt32("Quantite").GetValueOrDefault();
@@ -68,7 +49,7 @@ namespace WebApplication.Controllers
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
             int priceDish = HttpContext.Session.GetInt32("DishPrice").GetValueOrDefault();
             int total = quantite * priceDish;
-            //int dishPrice = HttpContext.Session.GetInt32("DishPrice").GetValueOrDefault();
+
             DTO.Order_Dish newOrder_Dish = new DTO.Order_Dish { FK_idDish = idDish, FK_idOrder = idOrder, Quantity=quantite , Total = total};
             Order_DishManager.AddOrder_Dish(newOrder_Dish);
             return RedirectToAction("ListOrder_Dish", "Order_Dish");

@@ -68,9 +68,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT into Delivery(created_at) values(@created_at); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT into Delivery(FK_idOrder, FK_idRestaurant, FK_idDelivery_Time, status) values( @FK_idOrder, @FK_idRestaurant, @FK_idDelivery_Time,  @status); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@created_at", delivery.Created_at);
+                    cmd.Parameters.AddWithValue("@FK_idOrder", delivery.FK_idOrder);
+                    cmd.Parameters.AddWithValue("@FK_idRestaurant", delivery.FK_idRestaurant);
+                    cmd.Parameters.AddWithValue("@FK_idDelivery_Time", delivery.FK_idDelivery_Time);
+                    
+                    cmd.Parameters.AddWithValue("@status", delivery.Status);
 
 
                     cn.Open();
@@ -85,6 +89,8 @@ namespace DAL
 
             return delivery;
         }
+
+      
 
         //Display 1 city with his ID given
         public Delivery GetDelivery(int id)

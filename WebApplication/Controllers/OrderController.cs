@@ -28,5 +28,14 @@ namespace WebApplication.Controllers
             HttpContext.Session.SetInt32("IdOrder", idOrder);
             return RedirectToAction("ListOrder_Dish", "Order_Dish");
         }
+
+        public ActionResult ShowOrder() 
+        {
+            int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
+            var ordersForAClient= OrderManager.GetAllOrdersForOneCustomer(idCustomer);
+            
+            return View(ordersForAClient);
+
+        }
     }
 }

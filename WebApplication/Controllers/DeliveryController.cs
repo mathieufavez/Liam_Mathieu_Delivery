@@ -26,5 +26,15 @@ namespace WebApplication.Controllers
             return View(deliverys);
         }
 
+        public ActionResult CreateDelivery()
+        {
+            int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
+            int idRestaurant = HttpContext.Session.GetInt32("IdRestaurant").GetValueOrDefault();
+            int idDeliveryTime = HttpContext.Session.GetInt32("IdDelivery_Time").GetValueOrDefault();
+            Delivery newDelivery = new Delivery{ FK_idOrder=idOrder, FK_idRestaurant=idRestaurant, FK_idDelivery_Time=idDeliveryTime, Status="A livrer"};
+            DeliveryManager.AddDelivery(newDelivery);
+            return RedirectToAction("ShowOrder","Order");
+        }
+
     }
 }

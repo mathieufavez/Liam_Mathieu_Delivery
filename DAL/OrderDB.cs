@@ -18,7 +18,7 @@ namespace DAL
         //Disply all the orders
         public List<Order> GetAllOrders()
         {
-            List<Order> results = null;
+            List<Order> results = new List<Order>();
 
             try
             {
@@ -40,7 +40,8 @@ namespace DAL
 
                             order.IdOrder = (int)dr["Id"];
                             order.Status = (string)dr["status"];
-                            order.Created_at = (string)dr["created_at"];
+                            order.Created_at = (DateTime)dr["created_at"];
+                            order.FK_idCustomer = (int)dr["FK_idCustomer"];
 
 
                             results.Add(order);
@@ -117,7 +118,7 @@ namespace DAL
         //Get all orders for one customer with the customer id
         public List<Order> GetAllOrdersForOneCustomer(int idCustomer)
         {
-            List<Order> results = null;
+            List<Order> results = new List<Order>();
 
             try
             {
@@ -139,6 +140,7 @@ namespace DAL
 
                             order.IdOrder = (int)dr["Id"];
                             order.Status = (string)dr["status"];
+                            order.Created_at = (DateTime)dr["created_at"];
                             order.FK_idCustomer = (int)dr["FK_idCustomer"];
 
                             results.Add(order);
@@ -153,6 +155,8 @@ namespace DAL
 
             return results;
         }
+
+       
     }
 }
 
