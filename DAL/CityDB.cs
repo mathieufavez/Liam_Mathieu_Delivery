@@ -107,6 +107,8 @@ namespace DAL
                             city = new City();
                             city.IdCity = (int)dr["Id"];
 
+                            city.Zip_code = (int)dr["zip_code"];
+
                             city.Name = (string)dr["name"];
                            
                         }

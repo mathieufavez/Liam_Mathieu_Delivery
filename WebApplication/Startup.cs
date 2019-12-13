@@ -67,6 +67,11 @@ namespace WebApplication
             services.AddScoped<IOrder_DishManager, Order_DishManager>();
             services.AddScoped<IOrder_DishDB, Order_DishDB>();
 
+            //Ajout DeliveryTime
+            services.AddScoped<IDelivery_TimeManager, Delivery_TimeManager>();
+            services.AddScoped<IDelivery_TimeDB, Delivery_TimeDB>();
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

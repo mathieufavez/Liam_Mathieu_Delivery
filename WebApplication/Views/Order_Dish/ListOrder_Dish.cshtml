@@ -6,9 +6,7 @@
 
 <h2>ListOrder_Dish</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_idOrder)
+                Numero de la commande
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FK_idDish)
@@ -48,3 +46,4 @@
     </tbody>
 </table>
 <a>@Html.ActionLink("Ajouter un plat","AddDish", new{/*  id=item.PrimaryKey */ })</a>
+<p><a>@Html.ActionLink("Continuer","ChooseDeliveryTime", new{/*  id=item.PrimaryKey */ })</a></p>

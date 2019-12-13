@@ -40,5 +40,26 @@ namespace WebApplication.Controllers
             Order_DishManager.AddOrder_Dish(newOrder_Dish);
             return RedirectToAction("ListOrder_Dish", "Order_Dish");
         }
+
+        public ActionResult ChooseDeliveryTime() 
+        {
+            return RedirectToAction("ChooseDeliveryTime","Delivery_Time");
+        }
+
+        [HttpGet]
+        public IActionResult GetQuantity()
+        {
+            return View();
+        }
+
+       /* [HttpPost]
+        public IActionResult GetQuantity(Order_Dish order_dish)
+        {
+
+            order_dish.Quantity = 
+            return View();
+        }*/
+
+
     }
 }

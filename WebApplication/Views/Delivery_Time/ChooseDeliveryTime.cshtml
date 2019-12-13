@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DTO.Delivery_Time>
+
+@{
+    ViewData["Title"] = "ChooseDeliveryTime";
+}
+
+<h2>ChooseDeliveryTime</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDelivery_Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Delivery_time)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDelivery_Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Delivery_time)
+            </td>
+            <td>
+                @Html.ActionLink("Selectionner", "ChoixDelivery_Time", new {  id=item.IdDelivery_Time }) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

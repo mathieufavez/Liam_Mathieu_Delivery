@@ -15,17 +15,29 @@ namespace WebApplication.Controllers
     {
 
         private IRestaurantManager RestaurantManager { get; }
+        private ICityManager CityManager { get; }
 
-        public RestaurantController(IRestaurantManager restaurantManager)
+        public RestaurantController(IRestaurantManager restaurantManager, ICityManager cityManager)
         {
             RestaurantManager = restaurantManager;
+            CityManager = cityManager;
         }
 
-        // GET: AllRestaurants
+
+        // Voir tous les restaurants avec nom de la ville à la place de idCity
         public ActionResult ListeRestaurant()
         {
-            var restaurant = RestaurantManager.GetAllRestaurants();
-            return View(restaurant);
+
+            List<DTO.Restaurant> listeRestau = RestaurantManager.GetAllRestaurants();
+            List<RestaurantCityViewModel> restaurantCity = new List<RestaurantCityViewModel>();
+            foreach(DTO.Restaurant r in listeRestau) {
+                RestaurantCityViewModel restaurantCityViewModel = new RestaurantCityViewModel();
+                restaurantCityViewModel.Restaurants = r;
+                restaurantCityViewModel.Cities = CityManager.GetCity(r.FK_idCity);
+                restaurantCity.Add(restaurantCityViewModel);
+            }
+            return View(restaurantCity);
+           
         }
 
         //Select the restaurant we chose
@@ -35,6 +47,7 @@ namespace WebApplication.Controllers
         }
 
         //Redirige vers le controller Order et la méthode CreateOrder
+        //Garde en mémoire l'idRestaurant
         public ActionResult CreateOrder(int id)
         {
 

@@ -17,7 +17,6 @@ namespace WebApplication.Controllers
         {
             DishManager = dishManager;
         }
-
         
         // GET: AllDishes for a restaurant
         public ActionResult ListeDishes()
@@ -32,5 +31,7 @@ namespace WebApplication.Controllers
             HttpContext.Session.SetInt32("IdDish",id);
             return RedirectToAction("CreateOrder_Dish", "Order_Dish");
         }
+
+        
     }
 }
