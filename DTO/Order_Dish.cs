@@ -13,10 +13,12 @@ namespace DTO
 
         public int FK_idDish { get; set; }
 
+        public int Total { get; set; }
+
 
         public override string ToString()
         {
-            return $"{IdOrder_Dish}|{Quantity}|{FK_idOrder}|{FK_idDish}";
+            return $"{IdOrder_Dish}|{Quantity}|{FK_idOrder}|{FK_idDish}| {Total}";
         }
     }
 }

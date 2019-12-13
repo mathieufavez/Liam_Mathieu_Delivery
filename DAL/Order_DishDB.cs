@@ -47,6 +47,7 @@ namespace DAL
 
                             order_Dish.FK_idOrder = (int)dr["FK_idOrder"];
                             order_Dish.FK_idDish = (int)dr["FK_idDish"];
+                            order_Dish.Total=(int)dr["total"];
 
                             results.Add(order_Dish);
                         }
@@ -70,12 +71,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT into Order_Dish(FK_idOrder, FK_idDish, quantity) values( @FK_idOrder, @FK_idDish, @quantity); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT into Order_Dish(FK_idOrder, FK_idDish, quantity, total) values( @FK_idOrder, @FK_idDish, @quantity, @total); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     //cmd.Parameters.AddWithValue("@quantity", order_Dish.Quantity);
                     cmd.Parameters.AddWithValue("@FK_idOrder", order_Dish.FK_idOrder);
                     cmd.Parameters.AddWithValue("@FK_idDish", order_Dish.FK_idDish);
                     cmd.Parameters.AddWithValue("@quantity", order_Dish.Quantity);
+                    cmd.Parameters.AddWithValue("@total", order_Dish.Total);
 
                     cn.Open();
 
@@ -115,6 +117,7 @@ namespace DAL
                             order_Dish.Quantity = (int)dr["quantity"];
                             order_Dish.FK_idOrder = (int)dr["FK_idOrder"];
                             order_Dish.FK_idDish = (int)dr["FK_idDish"];
+                            order_Dish.Total = (int)dr["total"];
 
                         }
                     }

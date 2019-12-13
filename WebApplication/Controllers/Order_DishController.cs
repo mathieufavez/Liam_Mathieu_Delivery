@@ -66,8 +66,10 @@ namespace WebApplication.Controllers
             int quantite = HttpContext.Session.GetInt32("Quantite").GetValueOrDefault();
             int idDish = HttpContext.Session.GetInt32("IdDish").GetValueOrDefault();
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
+            int priceDish = HttpContext.Session.GetInt32("DishPrice").GetValueOrDefault();
+            int total = quantite * priceDish;
             //int dishPrice = HttpContext.Session.GetInt32("DishPrice").GetValueOrDefault();
-            DTO.Order_Dish newOrder_Dish = new DTO.Order_Dish { FK_idDish = idDish, FK_idOrder = idOrder, Quantity=quantite };
+            DTO.Order_Dish newOrder_Dish = new DTO.Order_Dish { FK_idDish = idDish, FK_idOrder = idOrder, Quantity=quantite , Total = total};
             Order_DishManager.AddOrder_Dish(newOrder_Dish);
             return RedirectToAction("ListOrder_Dish", "Order_Dish");
         }
