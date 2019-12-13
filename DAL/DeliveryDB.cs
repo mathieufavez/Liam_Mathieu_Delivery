@@ -18,7 +18,7 @@ namespace DAL
         //Disply all the delivery
         public List<Delivery> GetAllDelivery(int deliverymanID)
         {
-            List<Delivery> results = null;
+            List<Delivery> results = new List<Delivery>();
 
             try
             {
@@ -26,7 +26,7 @@ namespace DAL
                 {
                     string query = "SELECT * FROM Delivery WHERE FK_idDeliveryman=@Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("Id", deliverymanID);
+                    cmd.Parameters.AddWithValue("@Id", deliverymanID);
 
                     cn.Open();
 
@@ -41,6 +41,10 @@ namespace DAL
 
                             delivery.IdDelivery = (int)dr["Id"];
                             delivery.Created_at = (DateTime)dr["created_at"];
+
+                            if (dr["status"] != DBNull.Value)
+                                delivery.Status = (string)dr["status"];
+
                             delivery.FK_idOrder = (int)dr["FK_idOrder"];
                             delivery.FK_idRestaurant = (int)dr["FK_idRestaurant"];
                             delivery.FK_idDelivery_Time = (int)dr["FK_idDelivery_Time"];
