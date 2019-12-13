@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DTO.Order_Dish>
+﻿@model IEnumerable<DishOrderDishViewModel>
 
 @{
     ViewData["Title"] = "ListOrder_Dish";
@@ -11,39 +11,40 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdOrder_Dish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
                 Numero de la commande
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_idDish)
+                Nom du plat
+            </th>
+            <th>
+                Quantite
+            </th>
+            <th>
+                Prix
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdOrder_Dish)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FK_idOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FK_idDish)
-            </td>
-          
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_Dishes.FK_idOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dishes.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_Dishes.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dishes.Price)
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>
-<a>@Html.ActionLink("Ajouter un plat","AddDish", new{/*  id=item.PrimaryKey */ })</a>
-<p><a>@Html.ActionLink("Continuer","ChooseDeliveryTime", new{/*  id=item.PrimaryKey */ })</a></p>
+<a>@Html.ActionLink("Ajouter un plat", "AddDish", new {/*  id=item.PrimaryKey */ })</a>
+<p><a>@Html.ActionLink("Continuer", "ChooseDeliveryTime", new {/*  id=item.PrimaryKey */ })</a></p>

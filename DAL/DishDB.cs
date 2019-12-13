@@ -24,8 +24,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Dish WHERE FK_idRestaurant="+idRestaurant+";";
+                    string query = "SELECT * FROM Dish WHERE FK_idRestaurant=@idRestaurant";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
 
                     cn.Open();
 
@@ -111,6 +112,7 @@ namespace DAL
                             dish.IdDish = (int)dr["id"];
 
                             dish.Name = (string)dr["name"];
+                            dish.Price = (int)dr["price"];
 
                         }
                     }

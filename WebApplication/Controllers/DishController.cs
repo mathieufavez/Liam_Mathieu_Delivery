@@ -26,8 +26,9 @@ namespace WebApplication.Controllers
             return View(dishes);
         }
 
-        public ActionResult Choix(int id) 
+        public ActionResult Choix(int id, int price) 
         {
+            HttpContext.Session.SetInt32("DishPrice", price);
             HttpContext.Session.SetInt32("IdDish",id);
             return RedirectToAction("GetQuantity", "Order_Dish");
         }
