@@ -10,7 +10,7 @@ namespace DAL
     public interface IOrder_DishDB
     {
 
-        List<Order_Dish> GetAllOrder_Dish();
+        List<Order_Dish> GetAllOrder_Dish(int idOrder);
 
         Order_Dish GetOrder_Dish(int id);
 

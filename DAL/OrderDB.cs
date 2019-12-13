@@ -83,38 +83,6 @@ namespace DAL
             return order;
         }
 
-        /*public int GetIdOrder()
-        {
-            int idOrder = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT MAX(Id) FROM[Order]";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.Read())
-                        {
-
-                            idOrder = (int)dr["Id"];
-                        }
-                    }
-                }
-            }
-
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return idOrder;
-        }*/
-
 
 
         //Update 1 order with his ID given
@@ -145,72 +113,6 @@ namespace DAL
             return result;
         }
 
-
-
-       /* public int GetIdOrder(string login)
-        {
-            int idCustomer = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "Select Id from Order WHERE login=@login";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("login", login);
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.Read())
-                        {
-
-                            idCustomer = (int)dr["Id"];
-                        }
-                    }
-                }
-            }
-
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return idCustomer;
-        }*/
-
-        /*public string identificationOrder(int id)
-        {
-            string result = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT *, CONCAT(LEFT(UPPER(lastName), 2), LEFT(name, 1)) AS Code FROM CUSTOMER WHERE Id=@id ; ";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.Read())
-                        {
-                            result = (string)dr["Code"];
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }*/
 
         //Get all orders for one customer with the customer id
         public List<Order> GetAllOrdersForOneCustomer(int idCustomer)

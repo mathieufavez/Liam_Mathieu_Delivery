@@ -29,18 +29,19 @@ namespace WebApplication.Controllers
         }
 
         //Select the restaurant we chose
-        public ActionResult Select(int idRestaurant) 
+        public ActionResult ListOrder(int id)
         {
-
-            HttpContext.Session.SetInt32("idRestaurant", idRestaurant);
-            var restaurant = RestaurantManager.GetRestaurant(idRestaurant);
-            return View(restaurant);
+            return RedirectToAction("ListOrder", "Order", new { id = id });
         }
 
-        public ActionResult Continue() 
+        //Redirige vers le controller Order et la méthode CreateOrder
+        public ActionResult CreateOrder(int id)
         {
-            int idRestaurant= HttpContext.Session.GetInt32("idRestaurant").GetValueOrDefault();
-            return RedirectToAction("ListeDishes", "Dish", new { id = idRestaurant });
+
+            HttpContext.Session.SetInt32("IdRestaurant",id);
+            return RedirectToAction("CreateOrder", "Order");
         }
+
+   
     }
 }

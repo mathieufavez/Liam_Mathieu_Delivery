@@ -13,9 +13,9 @@ namespace BLL
         {
             Order_DishDBObject = order_dishDB;
         }
-        public List<Order_Dish> GetAllOrder_Dish()
+        public List<Order_Dish> GetAllOrder_Dish(int idOrder)
         {
-            return Order_DishDBObject.GetAllOrder_Dish();
+            return Order_DishDBObject.GetAllOrder_Dish(idOrder);
         }
 
         public Order_Dish GetOrder_Dish(int id)

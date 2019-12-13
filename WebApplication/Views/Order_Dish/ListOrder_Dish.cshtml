@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DTO.Order_Dish>
+
+@{
+    ViewData["Title"] = "ListOrder_Dish";
+}
+
+<h2>ListOrder_Dish</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdOrder_Dish)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FK_idOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FK_idDish)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOrder_Dish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FK_idOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FK_idDish)
+            </td>
+          
+        </tr>
+}
+    </tbody>
+</table>
+<a>@Html.ActionLink("Ajouter un plat","AddDish", new{/*  id=item.PrimaryKey */ })</a>

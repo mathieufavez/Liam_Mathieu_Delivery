@@ -15,5 +15,7 @@ namespace DAL
         Order AddOrder(Order order);
 
         List<Order> GetAllOrdersForOneCustomer(int idCustomer);
+
+
     }
 }

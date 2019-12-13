@@ -18,7 +18,7 @@ namespace DAL
         //Disply all the dishes
         public List<Dish> GetAllDishes(int idRestaurant)
         {
-            List<Dish> results = null;
+            List<Dish> results = new List<Dish>();
 
             try
             {

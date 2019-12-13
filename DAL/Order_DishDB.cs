@@ -17,17 +17,17 @@ namespace DAL
         }
 
         //Disply all the order_dish
-        public List<Order_Dish> GetAllOrder_Dish()
+        public List<Order_Dish> GetAllOrder_Dish(int idOrder)
         {
-            List<Order_Dish> results = null;
+            List<Order_Dish> results = new List<Order_Dish>();
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Order_Dish";
+                    string query = "SELECT * FROM Order_Dish WHERE FK_idOrder=@idOrder";
                     SqlCommand cmd = new SqlCommand(query, cn);
-
+                    cmd.Parameters.AddWithValue("@idOrder", idOrder);
                     cn.Open();
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -40,10 +40,13 @@ namespace DAL
                             Order_Dish order_Dish = new Order_Dish();
 
                             order_Dish.IdOrder_Dish = (int)dr["Id"];
-                            order_Dish.Quantity = (string)dr["quantity"];
+
+
+                            if (dr["quantity"] != DBNull.Value)
+                                order_Dish.Quantity = (int)dr["quantity"];
+
                             order_Dish.FK_idOrder = (int)dr["FK_idOrder"];
                             order_Dish.FK_idDish = (int)dr["FK_idDish"];
-
 
                             results.Add(order_Dish);
                         }
@@ -67,9 +70,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT into Order_Dish(quantity, FK_idOrder, FK_idDish) values(@quantity, @FK_idOrder, @FK_idDish); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT into Order_Dish(FK_idOrder, FK_idDish) values( @FK_idOrder, @FK_idDish); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@quantity", order_Dish.Quantity);
+                    //cmd.Parameters.AddWithValue("@quantity", order_Dish.Quantity);
                     cmd.Parameters.AddWithValue("@FK_idOrder", order_Dish.FK_idOrder);
                     cmd.Parameters.AddWithValue("@FK_idDish", order_Dish.FK_idDish);
 
@@ -108,7 +111,7 @@ namespace DAL
                         {
 
                             order_Dish.IdOrder_Dish = (int)dr["Id"];
-                            order_Dish.Quantity = (string)dr["quantity"];
+                            order_Dish.Quantity = (int)dr["quantity"];
                             order_Dish.FK_idOrder = (int)dr["FK_idOrder"];
                             order_Dish.FK_idDish = (int)dr["FK_idDish"];
 
