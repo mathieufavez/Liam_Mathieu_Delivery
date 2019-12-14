@@ -32,5 +32,11 @@ namespace BLL
             return OrderDBObject.GetAllOrdersForOneCustomer(idCustomer);
         }
 
+        public Order GetOrder(int idOrder) 
+        {
+            return OrderDBObject.GetOrder(idOrder);
+        }
+
+
     }
 }

@@ -14,8 +14,6 @@ namespace WebApplication.Controllers
     public class CustomerController : Controller
     {
 
-
-        //Test push
         private ICustomerManager CustomerManager { get; }
         private ICityManager CityManager { get; }
 
@@ -55,17 +53,15 @@ namespace WebApplication.Controllers
         {
             int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
             Customer customer = CustomerManager.GetCustomer(idCustomer);
-            List<CustomerCityViewModel> customerCity = new List<CustomerCityViewModel>();
-          
-                CustomerCityViewModel customerCityViewModel = new CustomerCityViewModel();
-                customerCityViewModel.Customers = customer;
-                customerCityViewModel.Cities = CityManager.GetCity(customer.FK_idCity);
-                customerCity.Add(customerCityViewModel);
+
+            List<CustomerCityViewModel> customerCity = new List<CustomerCityViewModel>();  
+            CustomerCityViewModel customerCityViewModel = new CustomerCityViewModel();
+
+            customerCityViewModel.Customers = customer;
+            customerCityViewModel.Cities = CityManager.GetCity(customer.FK_idCity);
+            customerCity.Add(customerCityViewModel);
             
             return View(customerCity);
-            /*int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
-            var customer = CustomerManager.GetCustomer(idCustomer);
-            return View(customer);*/
         }
 
         public ActionResult ShowRestaurant() 

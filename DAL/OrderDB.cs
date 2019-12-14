@@ -57,6 +57,46 @@ namespace DAL
             return results;
         }
 
+        public Order GetOrder(int idOrder)
+        {
+
+            Order order = null;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from [Order] WHERE Id = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", idOrder);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            order = new Order();
+                            order.IdOrder = (int)dr["Id"];
+                            order.Status = (string)dr["status"];
+                            order.Created_at = (DateTime)dr["created_at"];
+                            order.FK_idCustomer = (int)dr["FK_idCustomer"];
+
+
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return order;
+        }
+
         //Add 1 order
         public Order AddOrder(Order order)
         {

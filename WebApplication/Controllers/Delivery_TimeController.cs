@@ -28,9 +28,9 @@ namespace WebApplication.Controllers
 
         public ActionResult ChoixDelivery_Time(int id) 
         {
-            HttpContext.Session.SetInt32("IdDelivery_Time", id);
-           
-            return RedirectToAction("CreateDelivery","Delivery");
+            HttpContext.Session.SetInt32("Id_Delivery_time", id);
+   
+            return RedirectToAction("OrderDetails","Order");
         }
     }
 }
