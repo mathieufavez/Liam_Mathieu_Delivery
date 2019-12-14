@@ -1,60 +1,34 @@
-﻿@model DTO.Deliveryman
+﻿@model IEnumerable<DeliverymanCityViewModel>
 
 @{
-    ViewData["Title"] = "HomeDeliveryman";
+    ViewData["Title"] = "HomeCustomer";
 }
 
-<h2>HomeDeliveryman</h2>
+<h2>Accueil livreur</h2>
 
-<div>
-    <h4>Deliveryman</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdDeliveryman)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IdDeliveryman)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Login)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Login)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FK_idCity)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FK_idCity)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Voir les livraisons", "ShowDeliverys", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+@foreach (var item in Model)
+{
+    <div>
+        <h3>Bienvenue @Html.DisplayFor(modelItem => item.Deliverymens.Name) !</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Votre adresse :
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.Deliverymens.Address)
+                @Html.DisplayFor(modelItem => item.Cities.Name)
+                @Html.DisplayFor(modelItem => item.Cities.Zip_code)
+
+            </dd>
+        </dl>
+    </div>
+}
+<div class="row" align="center">
+    <div class="col-sm-6" align="center">
+        <a asp-controller="Order" asp-action="ShowOrder" class="btn btn-success" role="button">Voir les commandes</a>
+    </div>
+    <div class="col-sm-6" align="center">
+        <a href="https://localhost:44311/Deliveryman/Connexion" class="btn btn-success" role="button">Changer l'adresse</a>
+    </div>
 </div>

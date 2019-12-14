@@ -63,9 +63,6 @@ namespace WebApplication.Controllers
                 customerCity.Add(customerCityViewModel);
             
             return View(customerCity);
-            /*int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
-            var customer = CustomerManager.GetCustomer(idCustomer);
-            return View(customer);*/
         }
 
         public ActionResult ShowRestaurant() 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using DAL;
 using BLL;
 using DTO;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -14,10 +15,12 @@ namespace WebApplication.Controllers
     {
 
         private IDeliverymanManager DeliverymanManager { get; }
-      
-        public DeliverymanController(IDeliverymanManager deliverymanManager)
+        private ICityManager CityManager { get; }
+
+        public DeliverymanController(IDeliverymanManager deliverymanManager, ICityManager cityManager)
         {
             DeliverymanManager = deliverymanManager;
+            CityManager = cityManager;
         }
 
 
@@ -46,8 +49,15 @@ namespace WebApplication.Controllers
         public ActionResult HomeDeliveryman()
         {
             int idDeliveryman = HttpContext.Session.GetInt32("IdDeliveryman").GetValueOrDefault();
-            var deliveryman = DeliverymanManager.GetDeliveryman(idDeliveryman);
-            return View(deliveryman);
+            Deliveryman deliveryman = DeliverymanManager.GetDeliveryman(idDeliveryman);
+            List<DeliverymanCityViewModel> deliverymanCity = new List<DeliverymanCityViewModel>();
+
+            DeliverymanCityViewModel deliverymanCityViewModel = new DeliverymanCityViewModel();
+            deliverymanCityViewModel.Deliverymens = deliveryman;
+            deliverymanCityViewModel.Cities = CityManager.GetCity(deliveryman.FK_idCity);
+            deliverymanCity.Add(deliverymanCityViewModel);
+
+            return View(deliverymanCity);
         }
 
         public ActionResult ShowDeliverys()
