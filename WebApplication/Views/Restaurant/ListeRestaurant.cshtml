@@ -44,7 +44,7 @@
             </td>
 
             <td>
-                @Html.ActionLink("Sélectionner", "CreateOrder", new { id = item.Restaurants.IdRestaurant })
+                @Html.ActionLink("Sélectionner", "CreateOrder", new { id = item.Restaurants.IdRestaurant, idCity = item.Restaurants.FK_idCity })
             </td>
         </tr>
 }

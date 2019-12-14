@@ -55,8 +55,7 @@ namespace DAL
                             if (dr["FK_idCity"] != DBNull.Value)
                                 deliveryman.FK_idCity = (int)dr["FK_idCity"];
 
-                            if (dr["FK_idDelivery"] != DBNull.Value)
-                                deliveryman.FK_idDelivery = (int)dr["FK_idDelivery"];
+                          
 
                             results.Add(deliveryman);
                         }
@@ -100,8 +99,7 @@ namespace DAL
                             deliveryman.Password = (string)dr["password"];
                             deliveryman.FK_idCity = (int)dr["FK_idCity"];
 
-                            if (dr["FK_idDelivery"] != DBNull.Value)
-                                deliveryman.FK_idDelivery = (int)dr["FK_idDelivery"];
+                          
 
                         }
                     }
@@ -125,7 +123,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT into Deliveryman(name, lastName, address, login, password, FK_iDCity, FK_idDelivery) values(@name,@lastName,@address,@login,@password,@FK_iDCity,@FK_idDelivery); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT into Deliveryman(name, lastName, address, login, password, FK_iDCity) values(@name,@lastName,@address,@login,@password,@FK_iDCity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", deliveryman.Name);
 
@@ -239,7 +237,7 @@ namespace DAL
         }
 
 
-        public int GetRightDeliveryman(int idRestaurant)
+        public int GetRightDeliveryman(int idRestaurant, int idCity)
         {
             int result = 0;
 
@@ -247,12 +245,18 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT id FROM Deliveryman WHERE FK_idCity=@id;";
+                    string query = "SELECT TOP(1) Deliveryman.Id FROM((Deliveryman "+
+                                    "INNER JOIN Restaurant ON Deliveryman.FK_idCity=@idCity) "+
+                                    "INNER JOIN Delivery ON @idRestaurant = Restaurant.Id) " +
+                                    "GROUP BY Deliveryman.Id HAVING COUNT(Delivery.status) < 5"; 
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
+                    cmd.Parameters.AddWithValue("@idCity", idCity);
 
                     cn.Open();
 
-                    result = cmd.ExecuteNonQuery();
+                    result = Convert.ToInt32(cmd.ExecuteScalar());
+                        
                 }
             }
             catch (Exception e)

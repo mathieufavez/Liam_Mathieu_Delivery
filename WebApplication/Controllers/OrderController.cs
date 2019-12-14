@@ -100,5 +100,17 @@ namespace WebApplication.Controllers
             return View(listeOrderDetails);
 
         }
+
+        public ActionResult Valider()
+        {
+
+            return RedirectToAction("CreateDelivery","Delivery");
+        }
+        public ActionResult Annuler() 
+        {
+
+            //Rediriger vers Order pour update l'ordre et le mettre en annuler
+            return RedirectToAction();
+        }
     }
 }
