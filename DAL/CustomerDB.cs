@@ -56,6 +56,8 @@ namespace DAL
                             if (dr["FK_idDelivery"] != DBNull.Value)
                                 customer.FK_idDelivery = (int)dr["FK_idDelivery"];
 
+                          
+
                             results.Add(customer);
                         }
                     }
@@ -100,6 +102,8 @@ namespace DAL
 
                             if (dr["FK_idDelivery"] != DBNull.Value)
                                 customer.FK_idDelivery = (int)dr["FK_idDelivery"];
+
+                           
 
 
 

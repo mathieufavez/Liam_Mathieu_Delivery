@@ -11,15 +11,11 @@ namespace DTO
 
         public int Price { get; set; }
 
-        public string Status { get; set; }
-
-        public string Created_at { get; set; }
-
         public int FK_idRestaurant { get; set; }
 
         public override string ToString()
         {
-            return $"{IdDish}|{Name}|{Price}|{Status}|{Created_at}|{FK_idRestaurant}";
+            return $"{IdDish}|{Name}|{Price}|{FK_idRestaurant}";
         }
     }
 }
