@@ -13,8 +13,11 @@ namespace DAL
 
         Delivery GetDelivery(int id);
 
-        int UpdateDelivery(Delivery delivery);
+        void UpdateDelivery(int idDelivery, int idDeliveryman);
 
         Delivery AddDelivery(Delivery delivery);
+
+        int GetNombreDeliveryALivrerPourUnDeliveryman(int idDeliveryman);
+
     }
 }

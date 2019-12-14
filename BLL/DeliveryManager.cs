@@ -23,14 +23,20 @@ namespace BLL
             return DeliveryDB.GetDelivery(id);
         }
 
-        public int UpdateDelivery(Delivery delivery)
+        public void UpdateDelivery(int idDelivery, int idDeliveryman)
         {
-            return DeliveryDB.UpdateDelivery(delivery);
+            DeliveryDB.UpdateDelivery(idDelivery, idDeliveryman);
         }
 
         public Delivery AddDelivery(Delivery delivery)
         {
             return DeliveryDB.AddDelivery(delivery);
         }
+
+        public int GetNombreDeliveryALivrerPourUnDeliveryman(int idDeliveryman)
+        {
+            return DeliveryDB.GetNombreDeliveryALivrerPourUnDeliveryman(idDeliveryman);
+        }
+
     }
 }

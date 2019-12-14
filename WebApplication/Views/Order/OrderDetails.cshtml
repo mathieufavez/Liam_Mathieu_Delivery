@@ -22,7 +22,7 @@
                 @Html.DisplayFor(modelItem => item.Cities.Name)
             </dd>
             <dt>
-               Heure de livraison :
+                Heure de livraison :
             </dt>
             <dd>
                 @Html.DisplayFor(modelItem => item.Delivery_Times.Delivery_time)
@@ -50,4 +50,8 @@
         </dl>
     </div>
 }
+<a>@Html.ActionLink("Valider", "Valider", new {/*  id=item.PrimaryKey */ })</a>
+<a>@Html.ActionLink("Annuler", "Annuler", new {/*  id=item.PrimaryKey */ })</a>
+
+
 

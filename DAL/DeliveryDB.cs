@@ -15,6 +15,37 @@ namespace DAL
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
+        public int GetNombreDeliveryALivrerPourUnDeliveryman(int idDeliveryman) 
+        {
+            int nbrDelivery = 0;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT COUNT(Id) FROM Delivery WHERE FK_idDeliveryman=@idDeliveryman AND status='A livrer'";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@idDeliveryman", idDeliveryman);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                       
+                            cn.Open();
+
+                            nbrDelivery = cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return nbrDelivery;
+        }
+
         //Disply all the delivery
         public List<Delivery> GetAllDelivery(int deliverymanID)
         {
@@ -74,11 +105,11 @@ namespace DAL
                 {
                     string query = "INSERT into Delivery(FK_idOrder, FK_idRestaurant, FK_idDelivery_Time, status) values( @FK_idOrder, @FK_idRestaurant, @FK_idDelivery_Time,  @status); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@status", delivery.Status);
                     cmd.Parameters.AddWithValue("@FK_idOrder", delivery.FK_idOrder);
                     cmd.Parameters.AddWithValue("@FK_idRestaurant", delivery.FK_idRestaurant);
                     cmd.Parameters.AddWithValue("@FK_idDelivery_Time", delivery.FK_idDelivery_Time);
-                    
-                    cmd.Parameters.AddWithValue("@status", delivery.Status);
+                  
 
 
                     cn.Open();
@@ -137,23 +168,21 @@ namespace DAL
 
 
         //Update 1 delivery with his ID given
-        public int UpdateDelivery(Delivery delivery)
+        public void UpdateDelivery(int idDelivery, int idDeliveryman)
         {
-            int result = 0;
-
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Delivery set name=@name WHERE Id=@id;";
+                    string query = "UPDATE Delivery set FK_idDeliveryman=@idDeliveryman WHERE Id=@idDelivery";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", delivery.IdDelivery);
-                    cmd.Parameters.AddWithValue("@name", delivery.Created_at);
+                    cmd.Parameters.AddWithValue("@idDeliveryman", idDeliveryman);
+                    cmd.Parameters.AddWithValue("@idDelivery", idDelivery);
 
 
                     cn.Open();
 
-                    result = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
@@ -161,7 +190,6 @@ namespace DAL
                 throw e;
             }
 
-            return result;
         }
 
     }

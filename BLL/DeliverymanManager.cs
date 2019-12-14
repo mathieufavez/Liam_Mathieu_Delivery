@@ -9,10 +9,12 @@ namespace BLL
     public class DeliverymanManager : IDeliverymanManager
     {
         public IDeliverymanDB DeliverymanDB { get; }
+   
 
         public DeliverymanManager(IDeliverymanDB deliverymanDB)
         {
             DeliverymanDB = deliverymanDB;
+
         }
         public List<Deliveryman> GetAllDeliveryman(int idCity)
         {
@@ -40,9 +42,10 @@ namespace BLL
             return DeliverymanDB.AddDeliveryman(deliveryman);
         }
 
-        public int GetRightDeliveryman(int idRestaurant)
+        public int GetRightDeliveryman(int idRestaurant, int idCity)
         {
-            return DeliverymanDB.GetRightDeliveryman(idRestaurant);
+             return DeliverymanDB.GetRightDeliveryman(idRestaurant, idCity);
+          
         }
 
         public Deliveryman GetDeliveryman(int idDeliveryman) 

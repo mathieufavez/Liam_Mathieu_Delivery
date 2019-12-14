@@ -19,7 +19,7 @@ namespace DAL
 
         string GetPassword(int id, string login);
 
-        int GetRightDeliveryman(int idRestaurant);
+        int GetRightDeliveryman(int idRestaurant, int idCity);
 
         Deliveryman GetDeliveryman(int idDeliveryman);
 

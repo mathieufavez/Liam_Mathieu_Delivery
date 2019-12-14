@@ -48,10 +48,11 @@ namespace WebApplication.Controllers
 
         //Redirige vers le controller Order et la méthode CreateOrder
         //Garde en mémoire l'idRestaurant
-        public ActionResult CreateOrder(int id)
+        public ActionResult CreateOrder(int id, int idCity)
         {
-
+            
             HttpContext.Session.SetInt32("IdRestaurant",id);
+            HttpContext.Session.SetInt32("IdCity", idCity);
             return RedirectToAction("CreateOrder", "Order");
         }
     }
