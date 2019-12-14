@@ -69,7 +69,54 @@ namespace DAL
             return results;
         }
 
-        
+        public Customer GetCustomer(int idCustomer)
+        {
+
+            Customer customer = null;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Customer WHERE Id = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", idCustomer);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            customer = new Customer();
+                            customer.IdCustomer = (int)dr["Id"];
+                            customer.Name = (string)dr["name"];
+                            customer.LastName = (string)dr["lastName"];
+                            customer.Address = (string)dr["address"];
+                            customer.Login = (string)dr["login"];
+                            customer.Password = (string)dr["password"];
+                            customer.FK_idCity = (int)dr["FK_idCity"];
+
+                            if (dr["FK_idDelivery"] != DBNull.Value)
+                                customer.FK_idDelivery = (int)dr["FK_idDelivery"];
+
+
+
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return customer;
+        }
+
+
 
         //Trouver le customer en donnant son login
         public int GetIdCustomer(string login)

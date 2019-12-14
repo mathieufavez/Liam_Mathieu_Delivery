@@ -38,14 +38,21 @@ namespace WebApplication.Controllers
             {
 
                 HttpContext.Session.SetInt32("IdCustomer", idCustomer);
-                return RedirectToAction("ListeRestaurant", "Restaurant", new { id = idCustomer });
+                return RedirectToAction("HomeCustomer", "Customer");
             }
 
             else
             {
 
-                return View( );
+                return View();
             }
+        }
+
+        public ActionResult HomeCustomer() 
+        {
+            int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
+            var customer = CustomerManager.GetCustomer(idCustomer);
+            return View(customer);
         }
 
     }

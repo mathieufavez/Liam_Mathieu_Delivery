@@ -38,13 +38,6 @@ namespace BLL
         }
 
         public Customer AddCustomer(Customer customer)
-
-            //check city
-
-            //if not then create new
-
-            //NEW CUSTOMER
-
         {
             return CustomerDB.AddCustomer(customer);
         }
@@ -52,5 +45,11 @@ namespace BLL
         {
             return CustomerDB.Code(id);
         }
+
+        public Customer GetCustomer(int idCustomer) 
+        {
+            return CustomerDB.GetCustomer(idCustomer);
+        }
+
     }
 }
