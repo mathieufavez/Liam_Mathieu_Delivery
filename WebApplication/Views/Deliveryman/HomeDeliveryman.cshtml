@@ -1,20 +1,20 @@
-﻿@model DTO.Customer
+﻿@model DTO.Deliveryman
 
 @{
-    ViewData["Title"] = "HomeCustomer";
+    ViewData["Title"] = "HomeDeliveryman";
 }
 
-<h2>HomeCustomer</h2>
+<h2>HomeDeliveryman</h2>
 
 <div>
-    <h4>Customer</h4>
+    <h4>Deliveryman</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.IdCustomer)
+            @Html.DisplayNameFor(model => model.IdDeliveryman)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IdCustomer)
+            @Html.DisplayFor(model => model.IdDeliveryman)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -52,21 +52,9 @@
         <dd>
             @Html.DisplayFor(model => model.FK_idCity)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FK_idDelivery)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FK_idDelivery)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Code)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Code)
-        </dd>
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Continuer", "ShowRestaurant", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Voir les livraisons", "ShowDeliverys", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>

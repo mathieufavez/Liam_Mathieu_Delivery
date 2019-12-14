@@ -44,5 +44,11 @@ namespace BLL
         {
             return DeliverymanDB.GetRightDeliveryman(idRestaurant);
         }
+
+        public Deliveryman GetDeliveryman(int idDeliveryman) 
+        {
+            return DeliverymanDB.GetDeliveryman(idDeliveryman);
+        }
+
     }
 }

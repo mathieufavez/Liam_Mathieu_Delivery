@@ -35,12 +35,25 @@ namespace WebApplication.Controllers
             if (deliveryman.Password == password)
             {
                 HttpContext.Session.SetInt32("IdDeliveryman", idDeliveryman);
-                return RedirectToAction("ListeDeliverys", "Delivery", new { id = idDeliveryman });
+                return RedirectToAction("HomeDeliveryman", "Deliveryman", new { id = idDeliveryman });
             }
             else
             {
                 return View();
             }
+        }
+
+        public ActionResult HomeDeliveryman()
+        {
+            int idDeliveryman = HttpContext.Session.GetInt32("IdDeliveryman").GetValueOrDefault();
+            var deliveryman = DeliverymanManager.GetDeliveryman(idDeliveryman);
+            return View(deliveryman);
+        }
+
+        public ActionResult ShowDeliverys()
+        {
+
+            return RedirectToAction("ListeDeliverys", "Delivery");
         }
 
     }

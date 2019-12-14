@@ -55,5 +55,10 @@ namespace WebApplication.Controllers
             return View(customer);
         }
 
+        public ActionResult ShowRestaurant() 
+        {
+            return RedirectToAction("ListeRestaurant","Restaurant");
+        }
+
     }
 }

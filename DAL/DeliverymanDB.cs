@@ -69,6 +69,48 @@ namespace DAL
             return results;
         }
 
+        public Deliveryman GetDeliveryman(int idDeliveryman)
+        {
+
+            Deliveryman deliveryman = null;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Deliveryman WHERE Id = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", idDeliveryman);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            deliveryman = new Deliveryman();
+                            deliveryman.IdDeliveryman = (int)dr["Id"];
+                            deliveryman.Name = (string)dr["name"];
+                            deliveryman.LastName = (string)dr["lastName"];
+                            deliveryman.Address = (string)dr["address"];
+                            deliveryman.Login = (string)dr["login"];
+                            deliveryman.Password = (string)dr["password"];
+                            deliveryman.FK_idCity = (int)dr["FK_idCity"];
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return deliveryman;
+        }
+
+
         public Deliveryman AddDeliveryman(Deliveryman deliveryman)
         {
 

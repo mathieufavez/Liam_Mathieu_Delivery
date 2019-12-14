@@ -21,5 +21,7 @@ namespace DAL
 
         int GetRightDeliveryman(int idRestaurant);
 
+        Deliveryman GetDeliveryman(int idDeliveryman);
+
     }
 }
