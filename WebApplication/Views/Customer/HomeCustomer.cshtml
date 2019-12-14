@@ -1,4 +1,4 @@
-﻿@model DTO.Customer
+﻿@model IEnumerable<CustomerCityViewModel>
 
 @{
     ViewData["Title"] = "HomeCustomer";
@@ -6,20 +6,23 @@
 
 <h2>Accueil client</h2>
 
-
+@foreach(var item in Model){
 <div>
-    <h3>Bienvenue @Html.DisplayFor(model => model.Name) !</h3>
+    <h3>Bienvenue @Html.DisplayFor(modelItem => item.Customers.Name) !</h3>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             Votre adresse :
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(modelItem => item.Customers.Address)
+            @Html.DisplayFor(modelItem => item.Cities.Name)
+            @Html.DisplayFor(modelItem => item.Cities.Zip_code)
+
         </dd>
     </dl>
 </div>
-
+}
 <div class="row" align="center">
     <div class="col-sm-4" align="center">
         <a asp-controller="Restaurant" asp-action="ListeRestaurant" class="btn btn-success" role="button">Nouvelle commande</a>

@@ -27,7 +27,6 @@ namespace WebApplication.Controllers
         // Voir tous les restaurants avec nom de la ville à la place de idCity
         public ActionResult ListeRestaurant()
         {
-
             List<DTO.Restaurant> listeRestau = RestaurantManager.GetAllRestaurants();
             List<RestaurantCityViewModel> restaurantCity = new List<RestaurantCityViewModel>();
             foreach(DTO.Restaurant r in listeRestau) {

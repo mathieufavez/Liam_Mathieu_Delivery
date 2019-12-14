@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using DAL;
 using BLL;
 using DTO;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -16,10 +17,12 @@ namespace WebApplication.Controllers
 
         //Test push
         private ICustomerManager CustomerManager { get; }
+        private ICityManager CityManager { get; }
 
-        public CustomerController(ICustomerManager customerManager)
+        public CustomerController(ICustomerManager customerManager, ICityManager cityManager)
         {
             CustomerManager = customerManager;
+            CityManager = cityManager;
         }
 
         [HttpGet]
@@ -51,8 +54,18 @@ namespace WebApplication.Controllers
         public ActionResult HomeCustomer() 
         {
             int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
+            Customer customer = CustomerManager.GetCustomer(idCustomer);
+            List<CustomerCityViewModel> customerCity = new List<CustomerCityViewModel>();
+          
+                CustomerCityViewModel customerCityViewModel = new CustomerCityViewModel();
+                customerCityViewModel.Customers = customer;
+                customerCityViewModel.Cities = CityManager.GetCity(customer.FK_idCity);
+                customerCity.Add(customerCityViewModel);
+            
+            return View(customerCity);
+            /*int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
             var customer = CustomerManager.GetCustomer(idCustomer);
-            return View(customer);
+            return View(customer);*/
         }
 
         public ActionResult ShowRestaurant() 
