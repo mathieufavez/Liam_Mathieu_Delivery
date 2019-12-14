@@ -4,7 +4,7 @@
     ViewData["Title"] = "ListeRestaurant";
 }
 
-<h2>ListeRestaurant</h2>
+<h2>Liste des restaurants</h2>
 
 
 <table class="table">
@@ -12,15 +12,15 @@
         <tr>
 
             <th>
-                Name
+                Nom
             </th>
 
             <th>
-                Address
+                Adresse
             </th>
 
             <th>
-                City
+                Ville
             </th>
 
             <th></th>
@@ -44,7 +44,7 @@
             </td>
 
             <td>
-                @Html.ActionLink("Select", "CreateOrder", new { id = item.Restaurants.IdRestaurant })
+                @Html.ActionLink("Sélectionner", "CreateOrder", new { id = item.Restaurants.IdRestaurant })
             </td>
         </tr>
 }
