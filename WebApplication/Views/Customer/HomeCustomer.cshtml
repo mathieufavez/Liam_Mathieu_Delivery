@@ -4,69 +4,34 @@
     ViewData["Title"] = "HomeCustomer";
 }
 
-<h2>HomeCustomer</h2>
+<h2>Accueil client</h2>
 
 <div>
-    <h4>Customer</h4>
+    <h3>Bienvenue @Html.DisplayFor(model => model.Name) !</h3>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.IdCustomer)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IdCustomer)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            Votre adresse :
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Address)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Login)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Login)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FK_idCity)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FK_idCity)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FK_idDelivery)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FK_idDelivery)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Code)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Code)
-        </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Continuer", "ShowRestaurant", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+<div class="row" align="center">
+    <div class="col-sm-4" align="right">
+        <div class="form-group">
+            <a href="https://localhost:44311/Restaurant/ListeRestaurant" type="submit" value="Nouvelle commande" class="btn btn-success" />
+        </div>
+        <div class="col-sm-4" align="center">
+            <div class="form-group">
+                <a href="https://localhost:44311/Restaurant/ListeRestaurant" type="submit" value="Voir les commandes" class="btn btn-success" />
+            </div>
+        </div>
+        <div class="col-sm-4" align="left">
+            <div class="form-group">
+                <a href="https://localhost:44311/Restaurant/ListeRestaurant" type="submit" value="Changer l'adresse de livraison" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
 </div>

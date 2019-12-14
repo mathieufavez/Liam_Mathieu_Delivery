@@ -52,11 +52,7 @@ namespace DAL
 
                             if (dr["FK_idCity"] != DBNull.Value)
                                 customer.FK_idCity = (int)dr["FK_idCity"];
-
-                            if (dr["FK_idDelivery"] != DBNull.Value)
-                                customer.FK_idDelivery = (int)dr["FK_idDelivery"];
-
-                          
+                         
 
                             results.Add(customer);
                         }
@@ -98,14 +94,7 @@ namespace DAL
                             customer.Address = (string)dr["address"];
                             customer.Login = (string)dr["login"];
                             customer.Password = (string)dr["password"];
-                            customer.FK_idCity = (int)dr["FK_idCity"];
-
-                            if (dr["FK_idDelivery"] != DBNull.Value)
-                                customer.FK_idDelivery = (int)dr["FK_idDelivery"];
-
-                           
-
-
+                            customer.FK_idCity = (int)dr["FK_idCity"];                   
 
                         }
                     }
