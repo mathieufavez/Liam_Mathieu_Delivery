@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DishOrderDishViewModel>
 
 @{
-    ViewData["Title"] = "ListOrder_Dish";
+    ViewData["Title"] = "Liste des plats commandés";
     int somme = 0;
     int sommeFrais = 5;
 
@@ -77,8 +77,10 @@
     </b><br />
 </p>
 
-<a>@Html.ActionLink("Ajouter un plat", "AddDish", new {/*  id=item.PrimaryKey */ })</a>
+@Html.ActionLink("Ajouter un plat", "AddDish", new { /*  id=item.PrimaryKey */ })
+<br/>
+<br />
 @if (somme != 0)
 {
-    <p><a>@Html.ActionLink("Continuer", "ChooseDeliveryTime", new {/*  id=item.PrimaryKey */ })</a></p>
+    <p><a asp-controller="Delivery_Time" asp-action="ChooseDeliveryTime" class="btn btn-success" role="button">Continuer</a></p>
 }

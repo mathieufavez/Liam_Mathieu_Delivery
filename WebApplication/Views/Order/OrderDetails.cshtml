@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<OrderDetailsViewModel>
 @{
-    ViewData["Title"] = "OrderDetails";
+    ViewData["Title"] = "Votre commande";
 }
 
 <h2>Votre commande</h2>
@@ -9,11 +9,14 @@
 {
     <div>
         <dl class="dl-horizontal">
+            <dt style="width:200px">
+                Prénom et Nom :
+            </dt>
             <dd>
                 @Html.DisplayFor(modelItem => item.Customers.Name)
                 @Html.DisplayFor(modelItem => item.Customers.LastName)
             </dd>
-            <dt>
+            <dt style="width:200px">
                 Adresse de livraison :
             </dt>
             <dd>
@@ -21,32 +24,32 @@
                 @Html.DisplayFor(modelItem => item.Cities.Zip_code)
                 @Html.DisplayFor(modelItem => item.Cities.Name)
             </dd>
-            <dt>
-               Heure de livraison :
+            <dt style="width:200px">
+                Heure de livraison :
             </dt>
             <dd>
                 @Html.DisplayFor(modelItem => item.Delivery_Times.Delivery_time)
             </dd>
-            <dt>
+            <dt style="width:200px">
                 Restaurant :
             </dt>
             <dd>
                 @Html.DisplayFor(modelItem => item.Restaurants.Name)
             </dd>
-            <dt>
+            <dt style="width:200px">
                 Numéro de la commande :
             </dt>
             <dd>
                 @Html.DisplayFor(modelItem => item.Orders.IdOrder)
             </dd>
 
-            <dt>
-                Commnade détaillée :
+            <dt style="width:200px">
+                Commande détaillée :
             </dt>
             <dd>
-                @Html.DisplayFor(modelItem => item.Order_Dishes.Quantity)
+                @Html.DisplayFor(modelItem => item.Dishes.Name)
+                @Html.DisplayFor(modelItem => item.Dishes.Price)
             </dd>
-
         </dl>
     </div>
 }

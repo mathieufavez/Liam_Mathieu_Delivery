@@ -24,10 +24,11 @@ namespace WebApplication.Controllers
         private IOrder_DishManager Order_DishManager { get; }
 
         private IRestaurantManager RestaurantManager { get; }
+        private IDishManager DishManager { get; }
 
 
 
-        public OrderController(IOrderManager orderManager, ICustomerManager customerManager, ICityManager cityManager, IDelivery_TimeManager delivery_TimeManager, IOrder_DishManager order_DishManager, IRestaurantManager restaurantManager)
+        public OrderController(IOrderManager orderManager, ICustomerManager customerManager, ICityManager cityManager, IDelivery_TimeManager delivery_TimeManager, IOrder_DishManager order_DishManager, IRestaurantManager restaurantManager, IDishManager dishManager)
         {
             OrderManager = orderManager;
             CustomerManager = customerManager;
@@ -35,6 +36,7 @@ namespace WebApplication.Controllers
             Delivery_TimeManager = delivery_TimeManager;
             Order_DishManager = order_DishManager;
             RestaurantManager = restaurantManager;
+            DishManager = dishManager;
       
         }
 
@@ -68,28 +70,31 @@ namespace WebApplication.Controllers
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
             int idRestaurant = HttpContext.Session.GetInt32("IdRestaurant").GetValueOrDefault();
             int idDeliveryTime = HttpContext.Session.GetInt32("Id_Delivery_time").GetValueOrDefault();
+            int idDish = HttpContext.Session.GetInt32("IdDish").GetValueOrDefault();
 
             List<DTO.Order_Dish> listeOrder_Dishes = Order_DishManager.GetAllOrder_Dish(idOrder);
+            List<DTO.Dish> listDishes = DishManager.GetAllDishes(idDish);
             DTO.Customer customer = CustomerManager.GetCustomer(idCustomer);
             DTO.Order order = OrderManager.GetOrder(idOrder);
             DTO.Restaurant restaurant = RestaurantManager.GetRestaurant(idRestaurant);
-
-
 
             orderDetails.Customers = customer;
             orderDetails.Orders = order;
             orderDetails.Restaurants = restaurant;
             orderDetails.Cities = CityManager.GetCity(customer.FK_idCity);
-            orderDetails.Delivery_Times =Delivery_TimeManager.GetDelivery_Time(idDeliveryTime);
+            orderDetails.Delivery_Times = Delivery_TimeManager.GetDelivery_Time(idDeliveryTime);
 
-           
-           
-            
-            /*foreach (DTO.Order_Dish od in listeOrder_Dishes)
+            foreach (DTO.Order_Dish od in listeOrder_Dishes)
             {
                 orderDetails.Order_Dishes = od;
-                orderDetails.Order_Dishes = Order_DishManager.GetOrder_Dish(od.FK_idOrder);
-            }*/
+                orderDetails.Order_Dishes = Order_DishManager.GetOrder_Dish(od.FK_idDish);
+            }
+
+            foreach (DTO.Dish d in listDishes)
+            {
+                orderDetails.Dishes = d;
+                orderDetails.Dishes = DishManager.GetDish(d.FK_idRestaurant);
+            }
 
             listeOrderDetails.Add(orderDetails);
             return View(listeOrderDetails);
