@@ -19,20 +19,15 @@
         </dd>
     </dl>
 </div>
+
 <div class="row" align="center">
-    <div class="col-sm-4" align="right">
-        <div class="form-group">
-            <a href="https://localhost:44311/Restaurant/ListeRestaurant" type="submit" value="Nouvelle commande" class="btn btn-success" />
-        </div>
-        <div class="col-sm-4" align="center">
-            <div class="form-group">
-                <a href="https://localhost:44311/Restaurant/ListeRestaurant" type="submit" value="Voir les commandes" class="btn btn-success" />
-            </div>
-        </div>
-        <div class="col-sm-4" align="left">
-            <div class="form-group">
-                <a href="https://localhost:44311/Restaurant/ListeRestaurant" type="submit" value="Changer l'adresse de livraison" class="btn btn-success" />
-            </div>
-        </div>
+    <div class="col-sm-4" align="center">
+        <a asp-controller="Restaurant" asp-action="ListeRestaurant" class="btn btn-success" role="button">Nouvelle commande</a>
+    </div>
+    <div class="col-sm-4" align="center">
+        <a asp-controller="Order" asp-action="ShowOrder" class="btn btn-success" role="button">Voir les commandes</a>
+    </div>
+    <div class="col-sm-4" align="center">
+        <a href="https://localhost:44311/Deliveryman/Connexion" class="btn btn-success" role="button">Changer l'adresse de livraison</a>
     </div>
 </div>
