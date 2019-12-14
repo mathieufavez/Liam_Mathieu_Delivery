@@ -12,6 +12,9 @@ namespace WebApplication.Controllers
 {
     public class CustomerController : Controller
     {
+
+
+        //Test push
         private ICustomerManager CustomerManager { get; }
 
         public CustomerController(ICustomerManager customerManager)
