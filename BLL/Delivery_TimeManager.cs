@@ -19,9 +19,9 @@ namespace BLL
             return Delivery_TimeDB.GetAllDelivery_Time();
         }
 
-        public string GetDelivery_Time(int id)
+        public Delivery_Time GetDelivery_Time(int id) 
         {
-            return Delivery_TimeDB.GetDelivery_Time(id);
+            return Delivery_TimeDB.GetDelivery_Time( id);
         }
 
 

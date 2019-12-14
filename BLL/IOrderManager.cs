@@ -15,5 +15,8 @@ namespace BLL
 
         List<Order> GetAllOrdersForOneCustomer(int idCustomer);
 
+        Order GetOrder(int idOrder);
+
+
     }
 }

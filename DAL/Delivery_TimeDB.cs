@@ -55,16 +55,16 @@ namespace DAL
             return results;
         }
 
-        public string GetDelivery_Time(int id)
+        public Delivery_Time GetDelivery_Time(int id)
         {
 
-            string delivery_time = null;
+            Delivery_Time delivery_time = null;
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select Delivery_Time from Delivery_Time WHERE Id = @id";
+                    string query = "Select * from Delivery_Time WHERE Id = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -75,9 +75,9 @@ namespace DAL
                         if (dr.Read())
                         {
 
-                        
-
-                            delivery_time = (string)dr["Delivery_Time"];
+                            delivery_time = new Delivery_Time();
+                            delivery_time.IdDelivery_Time = (int)dr["Id"];
+                            delivery_time.Delivery_time = (string)dr["Delivery_Time"];
 
                         }
                     }

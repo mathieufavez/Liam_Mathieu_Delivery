@@ -7,6 +7,6 @@ namespace BLL
     {
         List<Delivery_Time> GetAllDelivery_Time();
 
-        string GetDelivery_Time(int id);
+        Delivery_Time GetDelivery_Time(int id);
     }
 }
