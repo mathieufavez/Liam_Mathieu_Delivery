@@ -4,9 +4,8 @@
     ViewData["Title"] = "GetQuantity";
 }
 
-<h2>GetQuantity</h2>
+<h2>Choisir la quantité</h2>
 
-<h4>Order_Dish</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,12 +13,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
+                <label asp-for="Quantity" class="control-label">Quantité</label>
+                <input asp-for="Quantity" class="form-control" min="1" max="99"/>
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Confirmer" class="btn btn-default" />
+                <input type="submit" value="Confirmer" class="btn btn-success" />
             </div>
 
            

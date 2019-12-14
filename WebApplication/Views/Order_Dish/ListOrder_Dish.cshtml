@@ -2,25 +2,25 @@
 
 @{
     ViewData["Title"] = "ListOrder_Dish";
-    int somme =0;
+    int somme = 0;
     int sommeFrais = 5;
 
 }
 
-<h2>ListOrder_Dish</h2>
+<h2>Liste des plats commandés</h2>
 
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                Numero de la commande
+                Numéro de la commande
             </th>
             <th>
                 Nom du plat
             </th>
             <th>
-                Quantite
+                Quantité
             </th>
             <th>
                 Prix
@@ -63,11 +63,11 @@
 @foreach (var item in Model)
 {
     somme += item.Order_Dishes.Total;
-    sommeFrais+=item.Order_Dishes.Total;
+    sommeFrais += item.Order_Dishes.Total;
 }
 <p>
     <b>
-       Frais de livraison : 5 CHF
+        Frais de livraison : 5 CHF
     </b><br />
     <b>
         Total de la commande : @Html.DisplayFor(modelItem => somme) CHF
@@ -78,4 +78,7 @@
 </p>
 
 <a>@Html.ActionLink("Ajouter un plat", "AddDish", new {/*  id=item.PrimaryKey */ })</a>
-<p><a>@Html.ActionLink("Continuer", "ChooseDeliveryTime", new {/*  id=item.PrimaryKey */ })</a></p>
+@if (somme != 0)
+{
+    <p><a>@Html.ActionLink("Continuer", "ChooseDeliveryTime", new {/*  id=item.PrimaryKey */ })</a></p>
+}
