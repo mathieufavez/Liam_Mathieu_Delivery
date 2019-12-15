@@ -32,6 +32,11 @@ namespace BLL
         {
             return DeliverymanDB.GetDeliveryman(idDeliveryman);
         }
+        public int GetIdDeliveryman(string login) 
+        {
+            return DeliverymanDB.GetIdDeliveryman(login);
+        }
+
 
     }
 }

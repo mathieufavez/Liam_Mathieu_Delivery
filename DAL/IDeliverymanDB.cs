@@ -15,5 +15,7 @@ namespace DAL
 
         Deliveryman GetDeliveryman(int idDeliveryman);
 
+        int GetIdDeliveryman(string login);
+
     }
 }

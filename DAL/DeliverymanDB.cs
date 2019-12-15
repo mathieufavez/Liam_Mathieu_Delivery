@@ -120,5 +120,38 @@ namespace DAL
             return result;
         }
 
+        //Retourne l'ID du Deliveryman en fonction de son login
+        public int GetIdDeliveryman(string login)
+        {
+            int idCustomer = 0;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select Id from Deliveryman WHERE login=@login";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("login", login);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            idCustomer = (int)dr["Id"];
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return idCustomer;
+        }
+
     }
 }

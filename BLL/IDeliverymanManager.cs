@@ -12,5 +12,8 @@ namespace BLL
 
         Deliveryman GetDeliveryman(int idDeliveryman);
 
+        int GetIdDeliveryman(string login);
+
+
     }
 }

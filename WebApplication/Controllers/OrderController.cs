@@ -41,7 +41,7 @@ namespace WebApplication.Controllers
       
         }
 
-        public ActionResult CreateOrder (int id)
+        public ActionResult CreateOrder ()
         {
             int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
             DTO.Order newOrder  = new DTO.Order { Status = "En cours", FK_idCustomer = idCustomer };
