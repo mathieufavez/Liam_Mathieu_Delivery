@@ -16,7 +16,7 @@ namespace BLL
 
         string GetPassword(int id, string login);
 
-        int GetRightDeliveryman(int idRestaurant, int idCity);
+        int GetRightDeliveryman( int idCity);
 
         Deliveryman GetDeliveryman(int idDeliveryman);
 

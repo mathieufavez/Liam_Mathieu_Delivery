@@ -58,7 +58,7 @@ namespace WebApplication.Controllers
             Delivery newDelivery = new Delivery { FK_idOrder = idOrder, FK_idRestaurant = idRestaurant, FK_idDelivery_Time = idDeliveryTime, Status = "A livrer" };
             DeliveryManager.AddDelivery(newDelivery);
 
-            int idRightDeliveryman = DeliverymanManager.GetRightDeliveryman(idRestaurant, idCity);
+            int idRightDeliveryman = DeliverymanManager.GetRightDeliveryman(idCity);
             
             if (idRightDeliveryman == 0)
             {
@@ -82,10 +82,11 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult DeliveryDone(int id) 
+        public ActionResult DeliveryDone(int id, int idOrder) 
         {
             string status = "Effectué";
             DeliveryManager.UpdateDeliveryStatus(id, status);
+            OrderManager.UpdateOrder(idOrder,"Livré");
             return RedirectToAction("ListeDeliverys", "Delivery");
         }
     }

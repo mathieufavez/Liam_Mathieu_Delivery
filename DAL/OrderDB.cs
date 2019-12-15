@@ -42,6 +42,7 @@ namespace DAL
                             order.Status = (string)dr["status"];
                             order.Created_at = (DateTime)dr["created_at"];
                             order.FK_idCustomer = (int)dr["FK_idCustomer"];
+                            order.FK_idDelivery_Time = (int)dr["FK_idDelivery_Time"];
 
 
                             results.Add(order);
@@ -82,7 +83,7 @@ namespace DAL
                             order.Status = (string)dr["status"];
                             order.Created_at = (DateTime)dr["created_at"];
                             order.FK_idCustomer = (int)dr["FK_idCustomer"];
-
+                            order.FK_idDelivery_Time = (int)dr["FK_idDelivery_Time"];
 
                         }
                     }
@@ -149,6 +150,28 @@ namespace DAL
             }
         }
 
+        public void UpdateOrderDeliveryTime(int idOrder, int idDelivery_Time) 
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE [Order] set FK_idDelivery_Time=@idDelivery_Time WHERE Id=@id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", idOrder);
+                    cmd.Parameters.AddWithValue("@idDelivery_Time", idDelivery_Time);
+
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
 
         //Get all orders for one customer with the customer id
         public List<Order> GetAllOrdersForOneCustomer(int idCustomer)
@@ -177,6 +200,9 @@ namespace DAL
                             order.Status = (string)dr["status"];
                             order.Created_at = (DateTime)dr["created_at"];
                             order.FK_idCustomer = (int)dr["FK_idCustomer"];
+
+                            if (dr["FK_idDelivery_Time"] != DBNull.Value)
+                                order.FK_idDelivery_Time = (int)dr["FK_idDelivery_Time"];
 
                             results.Add(order);
                         }

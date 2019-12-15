@@ -129,7 +129,7 @@ namespace DAL
 
       
 
-        //Display 1 city with his ID given
+        //Retourne la delivery en fonction de l'id de l'ordre
         public Delivery GetDelivery(int id)
         {
 
@@ -139,7 +139,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Delivery WHERE Id = @id";
+                    string query = "Select * from Delivery WHERE FK_idOrder = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -152,8 +152,12 @@ namespace DAL
 
                             delivery = new Delivery();
                             delivery.IdDelivery = (int)dr["Id"];
-
                             delivery.Created_at = (DateTime)dr["created_at"];
+                            delivery.FK_idOrder = (int)dr["FK_idOrder"];
+                            delivery.FK_idRestaurant = (int)dr["FK_idRestaurant"];
+                            delivery.FK_idDelivery_Time = (int)dr["FK_idDelivery_Time"];
+                            if (dr["FK_idDeliveryman"] != DBNull.Value)
+                                delivery.FK_idDeliveryman = (int)dr["FK_idDeliveryman"];
 
                         }
                     }

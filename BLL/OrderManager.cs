@@ -37,6 +37,12 @@ namespace BLL
             OrderDBObject.UpdateOrder(id,status);
         }
 
+        public void UpdateOrderDeliveryTime(int id, int idDeliveryTime) 
+        {
+            OrderDBObject.UpdateOrderDeliveryTime(id, idDeliveryTime);
+        }
+
+
 
     }
 }

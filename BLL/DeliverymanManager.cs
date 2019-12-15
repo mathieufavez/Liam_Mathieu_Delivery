@@ -42,9 +42,9 @@ namespace BLL
             return DeliverymanDB.AddDeliveryman(deliveryman);
         }
 
-        public int GetRightDeliveryman(int idRestaurant, int idCity)
+        public int GetRightDeliveryman(int idCity)
         {
-             return DeliverymanDB.GetRightDeliveryman(idRestaurant, idCity);
+             return DeliverymanDB.GetRightDeliveryman( idCity);
           
         }
 

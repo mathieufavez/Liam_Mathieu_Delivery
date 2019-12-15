@@ -11,7 +11,6 @@ namespace DTO
 
         public string Delivery_time { get; set; }
 
-
         public override string ToString()
         {
             return $"{IdDelivery_Time}|{Delivery_time}";
