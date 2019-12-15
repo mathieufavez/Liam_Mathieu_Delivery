@@ -27,29 +27,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model)
+        {
+            <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Restaurants.Name)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Restaurants.Name)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Restaurants.Address)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Restaurants.Address)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Cities.Zip_code) 
-                @Html.DisplayFor(modelItem => item.Cities.Name)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cities.Zip_code)
+                    @Html.DisplayFor(modelItem => item.Cities.Name)
+                </td>
 
-            <td>
-                
-                <div align="center">
-                    <a asp-controller="Restaurant" asp-action="CreateOrder" asp-route-id="@item.Restaurants.IdRestaurant" asp-route-idCity="@item.Restaurants.FK_idCity" class="btn btn-success" role="button">Sélectionner</a>
-                </div>
-            </td>
-        </tr>
-}
+                <td>
+                    <div align="center">
+                        <a asp-controller="Restaurant" asp-action="CreateOrder" asp-route-id="@item.Restaurants.IdRestaurant" asp-route-idCity="@item.Restaurants.FK_idCity" class="btn btn-success" role="button">Sélectionner</a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<a asp-controller="Customer" asp-action="HomeCustomer">Retour à l'accueil Client</a>

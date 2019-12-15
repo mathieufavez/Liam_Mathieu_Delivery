@@ -28,11 +28,6 @@
             <th>
                 Total
             </th>
-            <th>
-
-            </th>
-
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -55,14 +50,14 @@
                     @Html.DisplayFor(modelItem => item.Order_Dishes.Total) CHF
                 </td>
                 <td>
-                    <p><a asp-controller="Order_Dish" asp-action="DeleteOrder_Dish" asp-route-idOrder_Dish="@item.Order_Dishes.IdOrder_Dish" class="btn btn-danger" role="button">Supprimer</a></p>
+                    <div align="center">
+                    <a asp-controller="Order_Dish" asp-action="DeleteOrder_Dish" asp-route-idOrder_Dish="@item.Order_Dishes.IdOrder_Dish" class="btn btn-danger" role="button">Supprimer</a>
+                    </div>
                 </td>
-
             </tr>
         }
 
     </tbody>
-
 </table>
 
 <p>@Html.ActionLink("Ajouter un plat", "AddDish", new { /*  id=item.PrimaryKey */ })</p>
@@ -91,3 +86,4 @@
 {
     <p><a asp-controller="Delivery_Time" asp-action="ChooseDeliveryTime" class="btn btn-success" role="button">Continuer</a></p>
 }
+<a asp-controller="Restaurant" asp-action="ListeRestaurant">Retour à la liste des restaurants</a>

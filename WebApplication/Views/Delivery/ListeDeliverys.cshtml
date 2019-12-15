@@ -6,6 +6,8 @@
 
 <h2>Liste des livraisons</h2>
 
+<a asp-controller="Deliveryman" asp-action="HomeDeliveryman">Retour à l'accueil Livraison</a>
+
 <table id="tableSortedByIdOrder" class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -34,9 +36,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Deliverys.IdDelivery)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Deliverys.Created_at)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Deliverys.Status)
