@@ -7,7 +7,7 @@
 <h2>Liste des restaurants</h2>
 
 
-<table class="table">
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
 
@@ -44,7 +44,10 @@
             </td>
 
             <td>
-                @Html.ActionLink("Sélectionner", "CreateOrder", new { id = item.Restaurants.IdRestaurant, idCity = item.Restaurants.FK_idCity })
+                
+                <div align="center">
+                    <a asp-controller="Restaurant" asp-action="CreateOrder" asp-route-id="@item.Restaurants.IdRestaurant" asp-route-idCity="@item.Restaurants.FK_idCity" class="btn btn-success" role="button">Sélectionner</a>
+                </div>
             </td>
         </tr>
 }

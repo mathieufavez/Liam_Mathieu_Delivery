@@ -55,5 +55,10 @@
     </div>
 }
 
-<a>@Html.ActionLink("Valider", "Valider", new {/*  id=item.PrimaryKey */ })</a>
-<a>@Html.ActionLink("Annuler", "Annuler", new {/*  id=item.PrimaryKey */ })</a>
+<div class="col-sm-6" align="center">
+    <a asp-controller="Order" asp-action="Valider" class="btn btn-success" role="button">Valider</a>
+</div>
+<div class="col-sm-6" align="center">
+    <a asp-controller="Order" asp-action="Annuler" class="btn btn-danger" role="button">Annuler</a>
+</div>
+

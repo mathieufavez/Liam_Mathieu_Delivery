@@ -18,14 +18,18 @@ namespace WebApplication.Controllers
         private IOrderManager OrderManager { get; }
         private IRestaurantManager RestaurantManager { get; }
         private IDelivery_TimeManager Delivery_TimeManager { get; }
+        private ICustomerManager CustomerManager { get; }
+        private ICityManager CityManager { get; }
 
-        public DeliveryController(IDeliveryManager deliveryManager, IDeliverymanManager deliverymanManager, IOrderManager orderManager, IRestaurantManager restaurantManager, IDelivery_TimeManager delivery_TimeManager)
+        public DeliveryController(IDeliveryManager deliveryManager, IDeliverymanManager deliverymanManager, IOrderManager orderManager, IRestaurantManager restaurantManager, IDelivery_TimeManager delivery_TimeManager, ICustomerManager customerManager, ICityManager cityManager)
         {
             DeliveryManager = deliveryManager;
             DeliverymanManager = deliverymanManager;
             OrderManager = orderManager;
             RestaurantManager = restaurantManager;
             Delivery_TimeManager = delivery_TimeManager;
+            CustomerManager = customerManager;
+            CityManager = cityManager;
         }
 
         public ActionResult ListeDeliverys(int idDeliveryman) 
@@ -42,6 +46,7 @@ namespace WebApplication.Controllers
                 deliveryDetails.Orders = OrderManager.GetOrder(d.FK_idOrder);
                 deliveryDetails.Restaurants = RestaurantManager.GetRestaurant(d.FK_idRestaurant);
                 deliveryDetails.Delivery_Times = Delivery_TimeManager.GetDelivery_Time(d.FK_idDelivery_Time);
+
                 listeDelivery.Add(deliveryDetails);
             }
 

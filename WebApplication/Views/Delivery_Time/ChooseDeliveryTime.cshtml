@@ -7,7 +7,7 @@
 <h2>Choisir une heure de livraison</h2>
 
 
-<table class="table">
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>
@@ -23,7 +23,9 @@
                 @Html.DisplayFor(modelItem => item.Delivery_time)
             </td>
             <td>
-                @Html.ActionLink("Sélectionner", "ChoixDelivery_Time", new {  id=item.IdDelivery_Time }) 
+                <div align="center">
+                    <a asp-controller="Delivery_Time" asp-action="ChoixDelivery_Time" asp-route-id="@item.IdDelivery_Time" class="btn btn-success" role="button">Sélectionner</a>
+                </div>
             </td>
         </tr>
 }

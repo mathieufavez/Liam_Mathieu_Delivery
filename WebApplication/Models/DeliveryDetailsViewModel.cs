@@ -15,5 +15,7 @@ namespace WebApplication.Models
         public DTO.Restaurant Restaurants { get; set; }
 
         public DTO.Delivery_Time Delivery_Times { get; set; }
+        public DTO.Customer Customers { get; set; }
+        public DTO.City Cities { get; set; }
     }
 }
