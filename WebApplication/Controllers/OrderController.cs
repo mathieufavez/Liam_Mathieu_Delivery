@@ -112,12 +112,12 @@ namespace WebApplication.Controllers
             int idRestaurant = HttpContext.Session.GetInt32("IdRestaurant").GetValueOrDefault();
             int idDeliveryTime = HttpContext.Session.GetInt32("Id_Delivery_time").GetValueOrDefault();
             OrderManager.UpdateOrderDeliveryTime(idOrder ,idDeliveryTime);
-            int idDish = HttpContext.Session.GetInt32("IdDish").GetValueOrDefault();
 
             List<DTO.Order_Dish> listeOrder_Dishes = Order_DishManager.GetAllOrder_Dish(idOrder);
             DTO.Customer customer = CustomerManager.GetCustomer(idCustomer);
             DTO.Order order = OrderManager.GetOrder(idOrder);
             DTO.Restaurant restaurant = RestaurantManager.GetRestaurant(idRestaurant);
+            
 
             orderDetails.Customers = customer;
             orderDetails.Orders = order;
@@ -127,11 +127,9 @@ namespace WebApplication.Controllers
 
             foreach (DTO.Order_Dish od in listeOrder_Dishes)
             {
-                OrderDetailsViewModel orderDetailsViewModel = new OrderDetailsViewModel();
-                orderDetailsViewModel.Order_Dishes = od;
-                orderDetailsViewModel.Order_Dishes = Order_DishManager.GetOrder_Dish(od.FK_idOrder);
-                orderDetailsViewModel.Dishes = DishManager.GetDish(od.FK_idDish);
-                listeOrderDetails.Add(orderDetailsViewModel);
+
+                orderDetails.Order_Dishes = od;
+                orderDetails.Dishes = DishManager.GetDish(od.FK_idDish);
             }
 
             listeOrderDetails.Add(orderDetails);
