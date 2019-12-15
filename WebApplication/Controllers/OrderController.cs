@@ -60,6 +60,14 @@ namespace WebApplication.Controllers
 
         }
 
+        public ActionResult CancelOrder(int id) 
+        {
+
+            string status = "Annulé";
+            OrderManager.UpdateOrder(id, status);
+            return RedirectToAction("ShowOrder","Order");
+        }
+
         public ActionResult OrderDetails() 
         {
 

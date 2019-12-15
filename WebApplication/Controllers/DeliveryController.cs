@@ -59,7 +59,6 @@ namespace WebApplication.Controllers
 
         public ActionResult DeliveryConfirmed()
         {
-            
             return View();
         }
 

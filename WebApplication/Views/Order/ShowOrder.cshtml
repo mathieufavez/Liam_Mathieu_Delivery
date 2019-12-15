@@ -40,7 +40,9 @@
                     <div align="center">
                         @if (item.Status == "En cours")
                         {
-                            <a asp-controller="Order" asp-action="ShowOrder" class="btn btn-danger" role="button">Annuler la commande</a>
+                          
+                            <a id="@item.IdOrder"  asp-controller="Order" asp-action="CancelOrder" asp-route-id="@item.IdOrder" class="btn btn-danger" role="button">Annuler la commande</a>
+
                         }
                     </div>
                 </td>
