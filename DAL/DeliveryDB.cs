@@ -55,9 +55,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Delivery WHERE FK_idDeliveryman=@Id";
+                    string query = "SELECT * FROM Delivery WHERE FK_idDeliveryman=@deliverymanID ORDER BY Id DESC;";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@Id", deliverymanID);
+                    cmd.Parameters.AddWithValue("@deliverymanID", deliverymanID);
 
                     cn.Open();
 
@@ -79,7 +79,9 @@ namespace DAL
                             delivery.FK_idOrder = (int)dr["FK_idOrder"];
                             delivery.FK_idRestaurant = (int)dr["FK_idRestaurant"];
                             delivery.FK_idDelivery_Time = (int)dr["FK_idDelivery_Time"];
-                            delivery.FK_idDeliveryman = (int)dr["FK_idDeliveryman"];
+
+                            if (dr["FK_idDeliveryman"] != DBNull.Value)
+                                delivery.FK_idDeliveryman = (int)dr["FK_idDeliveryman"];
 
 
                             results.Add(delivery);

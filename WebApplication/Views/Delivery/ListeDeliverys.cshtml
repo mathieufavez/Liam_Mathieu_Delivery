@@ -1,67 +1,64 @@
-﻿@model IEnumerable<DTO.Delivery>
+﻿@model IEnumerable<WebApplication.Models.DeliveryDetailsViewModel>
 
 @{
-    ViewData["Title"] = "ListeDeliverys";
+    ViewData["Title"] = "Liste des livraisons";
 }
 
 <h2>Liste des livraisons</h2>
 
 
-<table class="table">
+<table id="tableSortedByIdOrder" class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdDelivery)
+                Numéro de livraison
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Created_at)
+                Crée à
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                Statut
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_idOrder)
+                Numéro de commande
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_idRestaurant)
+                Nom restaurant
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_idDelivery_Time)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FK_idDeliveryman)
+                Heure de livraison
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdDelivery)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created_at)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FK_idOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FK_idRestaurant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FK_idDelivery_Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FK_idDeliveryman)
-            </td>
-            <td>
-                @Html.ActionLink("Livraison effectuée", "DeliveryDone", new {  id=item.IdDelivery}) 
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deliverys.IdDelivery)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deliverys.Created_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deliverys.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Orders.IdOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Restaurants.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delivery_Times.Delivery_time)
+                </td>
+                <td>
+                    <div align="center">
+                        <a id="@item.Deliverys.IdDelivery" asp-controller="Delivery" asp-action="DeliveryDone" asp-route-id="@item.Deliverys.IdDelivery" class="btn btn-success" role="button">Livraison effectuée</a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

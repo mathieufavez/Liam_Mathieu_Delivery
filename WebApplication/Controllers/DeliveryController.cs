@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using DAL;
 using BLL;
 using DTO;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -14,18 +15,37 @@ namespace WebApplication.Controllers
     {
         private IDeliveryManager DeliveryManager { get; }
         private IDeliverymanManager DeliverymanManager { get; }
+        private IOrderManager OrderManager { get; }
+        private IRestaurantManager RestaurantManager { get; }
+        private IDelivery_TimeManager Delivery_TimeManager { get; }
 
-        public DeliveryController(IDeliveryManager deliveryManager, IDeliverymanManager deliverymanManager)
+        public DeliveryController(IDeliveryManager deliveryManager, IDeliverymanManager deliverymanManager, IOrderManager orderManager, IRestaurantManager restaurantManager, IDelivery_TimeManager delivery_TimeManager)
         {
             DeliveryManager = deliveryManager;
             DeliverymanManager = deliverymanManager;
+            OrderManager = orderManager;
+            RestaurantManager = restaurantManager;
+            Delivery_TimeManager = delivery_TimeManager;
         }
 
         public ActionResult ListeDeliverys(int idDeliveryman) 
         {
+            List<DeliveryDetailsViewModel> listeDelivery = new List<DeliveryDetailsViewModel>();
+
             idDeliveryman = HttpContext.Session.GetInt32("IdDeliveryman").GetValueOrDefault();
-            var deliverys = DeliveryManager.GetAllDelivery(idDeliveryman);
-            return View(deliverys);
+            List<DTO.Delivery> listDeliverys = DeliveryManager.GetAllDelivery(idDeliveryman);
+
+            foreach (DTO.Delivery d in listDeliverys)
+            {
+                DeliveryDetailsViewModel deliveryDetails = new DeliveryDetailsViewModel();
+                deliveryDetails.Deliverys = d;
+                deliveryDetails.Orders = OrderManager.GetOrder(d.FK_idOrder);
+                deliveryDetails.Restaurants = RestaurantManager.GetRestaurant(d.FK_idRestaurant);
+                deliveryDetails.Delivery_Times = Delivery_TimeManager.GetDelivery_Time(d.FK_idDelivery_Time);
+                listeDelivery.Add(deliveryDetails);
+            }
+
+            return View(listeDelivery);
         }
 
         public ActionResult CreateDelivery()

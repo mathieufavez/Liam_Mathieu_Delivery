@@ -47,8 +47,9 @@
                 Commande détaillée :
             </dt>
             <dd>
+                @Html.DisplayFor(modelItem => item.Order_Dishes.Quantity) x
                 @Html.DisplayFor(modelItem => item.Dishes.Name)
-                @Html.DisplayFor(modelItem => item.Dishes.Price)
+                @Html.DisplayFor(modelItem => item.Dishes.Price) CHF
             </dd>
         </dl>
     </div>
