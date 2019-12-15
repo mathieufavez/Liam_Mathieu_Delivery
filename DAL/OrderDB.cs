@@ -15,49 +15,7 @@ namespace DAL
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        //Disply all the orders
-        public List<Order> GetAllOrders()
-        {
-            List<Order> results = new List<Order>();
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT * FROM Order";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            if (results == null)
-                                results = new List<Order>();
-
-                            Order order = new Order();
-
-                            order.IdOrder = (int)dr["Id"];
-                            order.Status = (string)dr["status"];
-                            order.Created_at = (DateTime)dr["created_at"];
-                            order.FK_idCustomer = (int)dr["FK_idCustomer"];
-                            order.FK_idDelivery_Time = (int)dr["FK_idDelivery_Time"];
-
-
-                            results.Add(order);
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return results;
-        }
-
+        //Retourne un Order en fonction de son ID
         public Order GetOrder(int idOrder)
         {
 
@@ -98,7 +56,7 @@ namespace DAL
             return order;
         }
 
-        //Add 1 order
+        //Ajoute un Order
         public Order AddOrder(Order order)
         {
 
@@ -125,9 +83,7 @@ namespace DAL
             return order;
         }
 
-
-
-        //Update 1 order with his ID given
+        //Change le status de l'ordre
         public void UpdateOrder(int idOrder, string status)
         {
             try
@@ -150,6 +106,7 @@ namespace DAL
             }
         }
 
+        //Change l'id deliveryTime de l'ordre
         public void UpdateOrderDeliveryTime(int idOrder, int idDelivery_Time) 
         {
             try
@@ -172,8 +129,7 @@ namespace DAL
             }
         }
 
-
-        //Get all orders for one customer with the customer id
+        //Retourne une liste de tous les ordres pour un client
         public List<Order> GetAllOrdersForOneCustomer(int idCustomer)
         {
             List<Order> results = new List<Order>();

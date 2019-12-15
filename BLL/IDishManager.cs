@@ -10,12 +10,5 @@ namespace BLL
 
         Dish GetDish(int id);
 
-        int UpdateDish(Dish dish);
-
-        int DeleteDish(int id);
-
-        Dish AddDish(Dish dish);
-
-        int GetDishPrice(int idDish);
     }
 }

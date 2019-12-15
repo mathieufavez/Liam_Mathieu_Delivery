@@ -1,0 +1,38 @@
+﻿@model DTO.Customer
+
+@{
+    ViewData["Title"] = "CancelOrder";
+
+}
+
+<h2>Annuler votre ordre</h2>
+
+<h4>Insérez le code suivant pour annuler votre ordre : @ViewBag.Message </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CancelOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" required />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Confirmer annulation" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Retour à l'accueil</a>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

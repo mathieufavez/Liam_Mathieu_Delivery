@@ -44,7 +44,6 @@ namespace WebApplication.Controllers
 
             else
             {
-
                 return View();
             }
         }

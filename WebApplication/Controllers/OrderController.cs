@@ -70,19 +70,40 @@ namespace WebApplication.Controllers
             return View(orderDeliverytime);
         }
 
-        public ActionResult CancelOrder(int id) 
+        [HttpGet]
+        public IActionResult CancelOrder(int id)
         {
+            HttpContext.Session.SetInt32("IdAnnulation", id);
+            int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
+            ViewBag.Message = CustomerManager.Code(idCustomer);
+            return View();
+        }
 
-            string status = "Annulé";
-            OrderManager.UpdateOrder(id, status);
-            Delivery delivery = DeliveryManager.GetDelivery(id);
-            DeliveryManager.UpdateDeliveryStatus(delivery.IdDelivery, status);
-            return RedirectToAction("ShowOrder","Order");
+        [HttpPost]
+        public IActionResult CancelOrder(Customer customer)
+        {
+            int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
+            string code = CustomerManager.Code(idCustomer);
+            if (customer.Code == code) 
+            {
+                int idAnnulation = HttpContext.Session.GetInt32("IdAnnulation").GetValueOrDefault();
+                string status = "Annulé";
+                OrderManager.UpdateOrder(idAnnulation, status);
+                Delivery delivery = DeliveryManager.GetDelivery(idAnnulation);
+                DeliveryManager.UpdateDeliveryStatus(delivery.IdDelivery, status);
+                return RedirectToAction("ShowOrder", "Order");
+            }
+
+            else
+            {
+
+                return View();
+            }
+          
         }
 
         public ActionResult OrderDetails() 
         {
-
             List<OrderDetailsViewModel> listeOrderDetails = new List<OrderDetailsViewModel>();
             OrderDetailsViewModel orderDetails = new OrderDetailsViewModel();
 

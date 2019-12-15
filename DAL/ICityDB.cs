@@ -8,17 +8,6 @@ namespace DAL
 {
     public interface ICityDB
     {
-
-        List<City> GetAllCities();
-
         City GetCity(int id);
-
-        int GetIdCity(string nameCity, string zipCity);
-
-        int UpdateCity(City city);
-
-        int DeleteCity(int id);
-
-        City AddCity(City city);
     }
 }

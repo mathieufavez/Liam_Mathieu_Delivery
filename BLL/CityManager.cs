@@ -13,33 +13,11 @@ namespace BLL
         {
             CityDB = cityDB;
         }
-        public List<City> GetAllCities()
-        {
-            return CityDB.GetAllCities();
-        }
 
         public City GetCity(int id)
         {
             return CityDB.GetCity(id);
         }
 
-        public int UpdateCity(City city) 
-        {
-            return CityDB.UpdateCity(city);
-        }
-        public int DeleteCity(int id)
-        {
-            return CityDB.DeleteCity(id);
-        }
-
-        public City AddCity(City city) 
-        {
-            return CityDB.AddCity(city);
-        }
-
-        public int GetIdCity(string nameCity, string zipCity) 
-        {
-            return CityDB.GetIdCity(nameCity, zipCity);
-        }
     }
 }

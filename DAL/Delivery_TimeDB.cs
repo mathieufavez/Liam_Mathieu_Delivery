@@ -16,6 +16,7 @@ namespace DAL
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
+        //Retourne une liste de tous les Delivery_Time
         public List<Delivery_Time> GetAllDelivery_Time()
         {
             List<Delivery_Time> results = null;
@@ -55,6 +56,7 @@ namespace DAL
             return results;
         }
 
+        //Retourne un Delivery_Time en fonction de son ID
         public Delivery_Time GetDelivery_Time(int id)
         {
 

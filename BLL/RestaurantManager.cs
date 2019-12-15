@@ -18,24 +18,9 @@ namespace BLL
             return RestaurantDBObject.GetAllRestaurants();
         }
 
-        public int GetidCityFromRestaurant(int idRestaurant) 
-        {
-            return RestaurantDBObject.GetidCityFromRestaurant(idRestaurant);
-        }
-
         public Restaurant GetRestaurant(int id)
         {
             return RestaurantDBObject.GetRestaurant(id);
-        }
-
-        public int UpdateRestaurant(Restaurant restaurant)
-        {
-            return RestaurantDBObject.UpdateRestaurant(restaurant);
-        }
-
-        public Restaurant AddRestaurant(Restaurant restaurant)
-        {
-            return RestaurantDBObject.AddRestaurant(restaurant);
         }
     }
 }

@@ -20,9 +20,7 @@ namespace DTO
 
         public int FK_idCity { get; set; }
 
-        public override string ToString()
-        {
-            return $"{IdCustomer}|{Name}|{LastName}|{Address}|{Login}|{Password}|{FK_idCity}";
-        }
+        public string Code { get; set; }
+
     }
 }

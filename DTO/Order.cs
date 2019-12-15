@@ -14,9 +14,5 @@ namespace DTO
 
         public int FK_idDelivery_Time { get; set; }
 
-        public override string ToString()
-        {
-            return $"{IdOrder}|{Status}|{Created_at}|{FK_idCustomer}|{FK_idDelivery_Time}";
-        }
     }
 }

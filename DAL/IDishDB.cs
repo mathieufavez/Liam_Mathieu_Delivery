@@ -14,12 +14,5 @@ namespace DAL
 
         Dish GetDish(int id);
 
-        int GetDishPrice(int idDish);
-
-        int UpdateDish(Dish dish);
-
-        int DeleteDish(int id);
-
-        Dish AddDish(Dish dish);
     }
 }

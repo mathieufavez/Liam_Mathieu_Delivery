@@ -7,12 +7,9 @@ namespace BLL
     public interface IOrderManager
     {
 
-        List<Order> GetAllOrders();
-
         void UpdateOrder(int id, string status);
 
         void UpdateOrderDeliveryTime(int id, int idDeliveryTime);
-
 
         Order AddOrder(Order order);
 

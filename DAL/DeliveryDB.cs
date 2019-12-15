@@ -15,38 +15,7 @@ namespace DAL
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public int GetNombreDeliveryALivrerPourUnDeliveryman(int idDeliveryman) 
-        {
-            int nbrDelivery = 0;
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT COUNT(Id) FROM Delivery WHERE FK_idDeliveryman=@idDeliveryman AND status='A livrer'";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idDeliveryman", idDeliveryman);
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                       
-                            cn.Open();
-
-                            nbrDelivery = cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return nbrDelivery;
-        }
-
-        //Disply all the delivery
+        //Retourne toutes les delivery
         public List<Delivery> GetAllDelivery(int deliverymanID)
         {
             List<Delivery> results = new List<Delivery>();
@@ -97,6 +66,7 @@ namespace DAL
             return results;
         }
 
+        //Créer une Delivery
         public Delivery AddDelivery(Delivery delivery)
         {
 
@@ -126,8 +96,6 @@ namespace DAL
 
             return delivery;
         }
-
-      
 
         //Retourne la delivery en fonction de l'id de l'ordre
         public Delivery GetDelivery(int id)
@@ -172,8 +140,7 @@ namespace DAL
             return delivery;
         }
 
-
-        //Update 1 delivery with his ID given
+        //Ajoute l'id du Deliveryman
         public void UpdateDelivery(int idDelivery, int idDeliveryman)
         {
             try
@@ -198,6 +165,7 @@ namespace DAL
 
         }
 
+        //Change le status de la delivery
         public void UpdateDeliveryStatus(int idDelivery, string status)
         {
             try

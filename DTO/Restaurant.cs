@@ -15,9 +15,5 @@ namespace DTO
 
         public int FK_idCity { get; set; }
 
-        public override string ToString()
-        {
-            return $"{IdRestaurant}|{Name}|{Merchant_name}|{Address}|{FK_idCity}";
-        }
     }
 }

@@ -15,10 +15,5 @@ namespace DTO
 
         public int Total { get; set; }
 
-
-        public override string ToString()
-        {
-            return $"{IdOrder_Dish}|{Quantity}|{FK_idOrder}|{FK_idDish}| {Total}";
-        }
     }
 }

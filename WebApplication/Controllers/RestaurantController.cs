@@ -48,7 +48,7 @@ namespace WebApplication.Controllers
         }
 
         //Redirige vers le controller Order et la méthode CreateOrder
-        //Garde en mémoire l'idRestaurant
+        //Garde en mémoire l'idRestaurant et idCity
         public ActionResult CreateOrder(int id, int idCity)
         {
             

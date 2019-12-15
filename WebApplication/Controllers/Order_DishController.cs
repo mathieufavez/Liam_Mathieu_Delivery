@@ -72,5 +72,11 @@ namespace WebApplication.Controllers
             HttpContext.Session.SetInt32("Quantite", order_dish.Quantity);
             return RedirectToAction("CreateOrder_Dish","Order_Dish");
         }
+
+        public ActionResult DeleteOrder_Dish(int idOrder_Dish) 
+        {
+            Order_DishManager.DeleteOrder_Dish(idOrder_Dish);
+            return RedirectToAction("ListOrder_Dish", "Order_Dish");
+        }
     }
 }

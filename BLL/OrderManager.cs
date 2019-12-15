@@ -13,10 +13,6 @@ namespace BLL
         {
             OrderDBObject = orderDB;
         }
-        public List<Order> GetAllOrders()
-        {
-            return OrderDBObject.GetAllOrders();
-        }
 
         public Order AddOrder(Order order)
         {

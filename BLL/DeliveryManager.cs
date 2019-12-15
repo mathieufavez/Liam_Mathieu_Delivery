@@ -33,11 +33,6 @@ namespace BLL
             return DeliveryDB.AddDelivery(delivery);
         }
 
-        public int GetNombreDeliveryALivrerPourUnDeliveryman(int idDeliveryman)
-        {
-            return DeliveryDB.GetNombreDeliveryALivrerPourUnDeliveryman(idDeliveryman);
-        }
-
         public void UpdateDeliveryStatus(int idDelivery, string status) 
         {
             DeliveryDB.UpdateDeliveryStatus(idDelivery, status);
