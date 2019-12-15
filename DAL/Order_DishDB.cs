@@ -110,12 +110,20 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
+                            if (dr["Id"] != DBNull.Value)
+                                order_Dish.IdOrder_Dish = (int)dr["Id"];
 
-                            order_Dish.IdOrder_Dish = (int)dr["Id"];
-                            order_Dish.Quantity = (int)dr["quantity"];
-                            order_Dish.FK_idOrder = (int)dr["FK_idOrder"];
-                            order_Dish.FK_idDish = (int)dr["FK_idDish"];
-                            order_Dish.Total = (int)dr["total"];
+                            if (dr["quantity"] != DBNull.Value)
+                                order_Dish.Quantity = (int)dr["quantity"];
+
+                            if (dr["FK_idOrder"] != DBNull.Value)
+                                order_Dish.FK_idOrder = (int)dr["FK_idOrder"];
+
+                            if (dr["FK_idDish"] != DBNull.Value)
+                                order_Dish.FK_idDish = (int)dr["FK_idDish"];
+
+                            if (dr["total"] != DBNull.Value)
+                                order_Dish.Total = (int)dr["total"];
 
                         }
                     }

@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<OrderDetailsViewModel>
 @{
     ViewData["Title"] = "Votre commande";
+    int totalFinal = 5;
 }
 
 <h2>Votre commande</h2>
 
 @foreach (var item in Model)
 {
+    totalFinal += (item.Order_Dishes.Quantity * item.Dishes.Price);
     <div>
         <dl class="dl-horizontal">
             <dt style="width:200px">
@@ -47,9 +49,15 @@
                 Commande détaillée :
             </dt>
             <dd>
-                @Html.DisplayFor(modelItem => item.Order_Dishes.Quantity) x
+                @Html.DisplayFor(modelItem => item.Order_Dishes.Quantity)
                 @Html.DisplayFor(modelItem => item.Dishes.Name)
-                @Html.DisplayFor(modelItem => item.Dishes.Price) CHF
+                @Html.DisplayFor(modelItem => item.Dishes.Price) CHF unité
+            </dd>
+            <dt style="width:200px">
+                Total finale de la commande :
+            </dt>
+            <dd>
+                @totalFinal CHF (comprend les 5 francs de frais de transport)
             </dd>
         </dl>
     </div>
