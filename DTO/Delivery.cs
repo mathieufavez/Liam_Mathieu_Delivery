@@ -20,9 +20,5 @@ namespace DTO
 
         public int FK_idDeliveryman { get; set; }
 
-        public override string ToString()
-        {
-            return $"{IdDelivery}|{Created_at}|{Status}|{FK_idOrder}|{FK_idRestaurant}|{FK_idDelivery_Time}|{FK_idDeliveryman}";
-        }
     }
 }

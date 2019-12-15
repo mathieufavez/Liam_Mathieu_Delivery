@@ -16,7 +16,7 @@ namespace DAL
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        //Disply all the order_dish
+        //Retourne une liste de tous les Order_Dish en fonction de l'ID de l'ordre
         public List<Order_Dish> GetAllOrder_Dish(int idOrder)
         {
             List<Order_Dish> results = new List<Order_Dish>();
@@ -64,9 +64,7 @@ namespace DAL
 
         //Ajoute 1 Order_Dish
         public Order_Dish AddOrder_Dish(Order_Dish order_Dish)
-        {
-
-
+        { 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -92,7 +90,7 @@ namespace DAL
             return order_Dish;
         }
 
-        //Display 1 Order_Dish with his ID given
+        //Retourne un Order_Dish en fonction de son ID
         public Order_Dish GetOrder_Dish(int id)
         {
 
@@ -132,8 +130,7 @@ namespace DAL
             return order_Dish;
         }
 
-
-        //Update 1 Order_Dish with his ID given
+        //Ajoute la quantité à un Order_Dish
         public int UpdateOrder_Dish(Order_Dish order_dish)
         {
             int result = 0;
@@ -160,7 +157,6 @@ namespace DAL
 
             return result;
         }
-
 
         //Delete 1 city with his ID given
         public int DeleteOrder_Dish(int id)

@@ -15,8 +15,6 @@ namespace BLL
 
         Delivery AddDelivery(Delivery delivery);
 
-        int GetNombreDeliveryALivrerPourUnDeliveryman(int idDeliveryman);
-
         void UpdateDeliveryStatus(int idDelivery, string status);
 
 

@@ -13,23 +13,10 @@ namespace BLL
         {
             CustomerDB = customerDB;
         }
-        public List<Customer> GetAllCustomers()
-        {
-            return CustomerDB.GetAllCustomers();
-        }
 
         public int GetIdCustomer(string login)
         {
             return CustomerDB.GetIdCustomer(login);
-        }
-
-        public int UpdateCustomer(Customer customer)
-        {
-            return CustomerDB.UpdateCustomer(customer);
-        }
-        public int DeleteCustomer(int id)
-        {
-            return CustomerDB.DeleteCustomer(id);
         }
 
         public string GetPassword(int id, string login) {
@@ -37,10 +24,6 @@ namespace BLL
             return CustomerDB.GetPassword(id,login);
         }
 
-        public Customer AddCustomer(Customer customer)
-        {
-            return CustomerDB.AddCustomer(customer);
-        }
         public string Code(int id)
         {
             return CustomerDB.Code(id);

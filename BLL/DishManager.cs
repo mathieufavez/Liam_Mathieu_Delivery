@@ -23,24 +23,5 @@ namespace BLL
         {
             return DishDBObject.GetDish(id);
         }
-
-        public int UpdateDish(Dish dish)
-        {
-            return DishDBObject.UpdateDish(dish);
-        }
-        public int DeleteDish(int id)
-        {
-            return DishDBObject.DeleteDish(id);
-        }
-
-        public Dish AddDish(Dish dish)
-        {
-            return DishDBObject.AddDish(dish);
-        }
-
-        public int GetDishPrice(int idDish)
-        {
-            return DishDBObject.GetDishPrice(idDish);
-        }
     }
 }
