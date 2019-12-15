@@ -38,5 +38,10 @@ namespace BLL
             return DeliveryDB.GetNombreDeliveryALivrerPourUnDeliveryman(idDeliveryman);
         }
 
+        public void UpdateDeliveryStatus(int idDelivery, string status) 
+        {
+            DeliveryDB.UpdateDeliveryStatus(idDelivery, status);
+        }
+
     }
 }

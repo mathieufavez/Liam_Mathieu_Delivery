@@ -17,5 +17,8 @@ namespace BLL
 
         int GetNombreDeliveryALivrerPourUnDeliveryman(int idDeliveryman);
 
+        void UpdateDeliveryStatus(int idDelivery, string status);
+
+
     }
 }

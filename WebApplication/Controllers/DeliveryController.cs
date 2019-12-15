@@ -63,5 +63,11 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        public ActionResult DeliveryDone(int id) 
+        {
+            string status = "Effectué";
+            DeliveryManager.UpdateDeliveryStatus(id, status);
+            return RedirectToAction("ListeDeliverys", "Delivery");
+        }
     }
 }

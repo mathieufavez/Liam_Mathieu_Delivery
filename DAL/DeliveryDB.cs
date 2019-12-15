@@ -192,5 +192,27 @@ namespace DAL
 
         }
 
+        public void UpdateDeliveryStatus(int idDelivery, string status)
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE [Delivery] set status=@status WHERE Id=@id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", idDelivery);
+                    cmd.Parameters.AddWithValue("@status", status);
+
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

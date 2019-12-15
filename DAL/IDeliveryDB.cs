@@ -19,5 +19,8 @@ namespace DAL
 
         int GetNombreDeliveryALivrerPourUnDeliveryman(int idDeliveryman);
 
+        void UpdateDeliveryStatus(int idDelivery, string status);
+
+
     }
 }
