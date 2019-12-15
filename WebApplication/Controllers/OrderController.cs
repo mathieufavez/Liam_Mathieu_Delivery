@@ -108,9 +108,10 @@ namespace WebApplication.Controllers
         }
         public ActionResult Annuler() 
         {
-
-            //Rediriger vers Order pour update l'ordre et le mettre en annuler
-            return RedirectToAction();
+            int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
+            string newStatus = "Annulé";
+            OrderManager.UpdateOrder(idOrder,newStatus);
+            return View();
         }
     }
 }

@@ -127,31 +127,26 @@ namespace DAL
 
 
         //Update 1 order with his ID given
-        public int UpdateOrder(Order order)
+        public void UpdateOrder(int idOrder, string status)
         {
-            int result = 0;
-
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Order set status=@status WHERE Id=@id;";
+                    string query = "UPDATE [Order] set status=@status WHERE Id=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", order.IdOrder);
-                    cmd.Parameters.AddWithValue("@status", order.Status);
+                    cmd.Parameters.AddWithValue("@id", idOrder);
+                    cmd.Parameters.AddWithValue("@status", status);
 
 
                     cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
-
-            return result;
         }
 
 

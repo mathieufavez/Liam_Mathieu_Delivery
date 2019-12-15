@@ -10,7 +10,7 @@ namespace DAL
     {
         List<Order> GetAllOrders();
 
-        int UpdateOrder(Order order);
+        void UpdateOrder(int id, string status);
 
         Order AddOrder(Order order);
 

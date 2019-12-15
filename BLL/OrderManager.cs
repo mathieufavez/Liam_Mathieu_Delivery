@@ -18,11 +18,6 @@ namespace BLL
             return OrderDBObject.GetAllOrders();
         }
 
-        public int UpdateOrder(Order order)
-        {
-            return OrderDBObject.UpdateOrder(order);
-        }
-
         public Order AddOrder(Order order)
         {
             return OrderDBObject.AddOrder(order);
@@ -35,6 +30,11 @@ namespace BLL
         public Order GetOrder(int idOrder) 
         {
             return OrderDBObject.GetOrder(idOrder);
+        }
+
+        public void UpdateOrder(int id, string status) 
+        {
+            OrderDBObject.UpdateOrder(id,status);
         }
 
 
