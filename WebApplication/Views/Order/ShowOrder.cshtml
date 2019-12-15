@@ -1,7 +1,17 @@
-﻿@model IEnumerable<DTO.Order>
+﻿@model IEnumerable<OrderDeliveryDelivery_TimeViewModel>
 
 @{
     ViewData["Title"] = "Vos commandes";
+
+    DateTime date3heures = DateTime.Parse("03:00");
+    string date3heuress = date3heures.ToString("HH:mm");
+
+    TimeSpan date3HeuresOk = TimeSpan.Parse(date3heuress);
+
+    string dateNow = DateTime.Now.ToString("HH:mm");
+    TimeSpan dateNowOk = TimeSpan.Parse(dateNow);
+
+
 }
 
 
@@ -18,7 +28,7 @@
                 Statut
             </th>
             <th>
-                Crée à
+                Heure de livraison
             </th>
             <th></th>
         </tr>
@@ -28,20 +38,23 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdOrder)
+                    @Html.DisplayFor(modelItem => item.Orders.IdOrder)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @Html.DisplayFor(modelItem => item.Orders.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Created_at)
+                    @Html.DisplayFor(modelItem => item.Delivery_Times.Delivery_time)
                 </td>
                 <td>
                     <div align="center">
-                        @if (item.Status == "En cours")
+
+                        
+                        @if (item.Orders.Status == "En cours" /*&& (DateTime.Compare  (DateTime.Parse (item.Delivery_Times.Delivery_time).Subtract(dateNowOk)   ,   date3HeuresOk )  >0    */  )
                         {
-                          
-                            <a id="@item.IdOrder"  asp-controller="Order" asp-action="CancelOrder" asp-route-id="@item.IdOrder" class="btn btn-danger" role="button">Annuler la commande</a>
+
+                            //Test pour afficher le bouton annulé au maximum 3 heures avaant...Echec
+                            <a asp-controller="Order" asp-action="CancelOrder" asp-route-id="@item.Orders.IdOrder" class="btn btn-danger" role="button">Annuler la commande</a>
 
                         }
                     </div>

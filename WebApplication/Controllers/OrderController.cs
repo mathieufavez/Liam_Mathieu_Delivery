@@ -25,10 +25,10 @@ namespace WebApplication.Controllers
 
         private IRestaurantManager RestaurantManager { get; }
         private IDishManager DishManager { get; }
+        private IDeliveryManager DeliveryManager { get; }
 
 
-
-        public OrderController(IOrderManager orderManager, ICustomerManager customerManager, ICityManager cityManager, IDelivery_TimeManager delivery_TimeManager, IOrder_DishManager order_DishManager, IRestaurantManager restaurantManager, IDishManager dishManager)
+        public OrderController(IOrderManager orderManager, ICustomerManager customerManager, ICityManager cityManager, IDelivery_TimeManager delivery_TimeManager, IOrder_DishManager order_DishManager, IRestaurantManager restaurantManager, IDishManager dishManager, IDeliveryManager deliveryManager)
         {
             OrderManager = orderManager;
             CustomerManager = customerManager;
@@ -37,6 +37,7 @@ namespace WebApplication.Controllers
             Order_DishManager = order_DishManager;
             RestaurantManager = restaurantManager;
             DishManager = dishManager;
+            DeliveryManager = deliveryManager;
       
         }
 
@@ -54,10 +55,19 @@ namespace WebApplication.Controllers
         public ActionResult ShowOrder() 
         {
             int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
-            var ordersForAClient= OrderManager.GetAllOrdersForOneCustomer(idCustomer);
-            
-            return View(ordersForAClient);
+            List<DTO.Order> listeOrder= OrderManager.GetAllOrdersForOneCustomer(idCustomer);
 
+            List <OrderDeliveryDelivery_TimeViewModel> orderDeliverytime = new List<OrderDeliveryDelivery_TimeViewModel>();
+
+            foreach (DTO.Order o in listeOrder) 
+            {
+                OrderDeliveryDelivery_TimeViewModel orderDeliveryDelivery_TimeViewModel = new OrderDeliveryDelivery_TimeViewModel();
+                orderDeliveryDelivery_TimeViewModel.Orders = o;
+                orderDeliveryDelivery_TimeViewModel.Delivery_Times = Delivery_TimeManager.GetDelivery_Time(o.FK_idDelivery_Time);
+                orderDeliverytime.Add(orderDeliveryDelivery_TimeViewModel);
+            }
+
+            return View(orderDeliverytime);
         }
 
         public ActionResult CancelOrder(int id) 
@@ -65,6 +75,8 @@ namespace WebApplication.Controllers
 
             string status = "Annulé";
             OrderManager.UpdateOrder(id, status);
+            Delivery delivery = DeliveryManager.GetDelivery(id);
+            DeliveryManager.UpdateDeliveryStatus(delivery.IdDelivery, status);
             return RedirectToAction("ShowOrder","Order");
         }
 
@@ -78,6 +90,7 @@ namespace WebApplication.Controllers
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
             int idRestaurant = HttpContext.Session.GetInt32("IdRestaurant").GetValueOrDefault();
             int idDeliveryTime = HttpContext.Session.GetInt32("Id_Delivery_time").GetValueOrDefault();
+            OrderManager.UpdateOrderDeliveryTime(idOrder ,idDeliveryTime);
             int idDish = HttpContext.Session.GetInt32("IdDish").GetValueOrDefault();
 
             List<DTO.Order_Dish> listeOrder_Dishes = Order_DishManager.GetAllOrder_Dish(idOrder);

@@ -15,10 +15,13 @@ namespace WebApplication.Controllers
         private IDeliveryManager DeliveryManager { get; }
         private IDeliverymanManager DeliverymanManager { get; }
 
-        public DeliveryController(IDeliveryManager deliveryManager, IDeliverymanManager deliverymanManager)
+        private IOrderManager OrderManager { get; }
+
+        public DeliveryController(IDeliveryManager deliveryManager, IDeliverymanManager deliverymanManager, IOrderManager orderManager)
         {
             DeliveryManager = deliveryManager;
             DeliverymanManager = deliverymanManager;
+            OrderManager = orderManager;
         }
 
         public ActionResult ListeDeliverys(int idDeliveryman) 
@@ -38,7 +41,7 @@ namespace WebApplication.Controllers
             Delivery newDelivery = new Delivery { FK_idOrder = idOrder, FK_idRestaurant = idRestaurant, FK_idDelivery_Time = idDeliveryTime, Status = "A livrer" };
             DeliveryManager.AddDelivery(newDelivery);
 
-            int idRightDeliveryman = DeliverymanManager.GetRightDeliveryman(idRestaurant, idCity);
+            int idRightDeliveryman = DeliverymanManager.GetRightDeliveryman(idCity);
             
             if (idRightDeliveryman == 0)
             {
@@ -62,10 +65,11 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult DeliveryDone(int id) 
+        public ActionResult DeliveryDone(int id, int idOrder) 
         {
             string status = "Effectué";
             DeliveryManager.UpdateDeliveryStatus(id, status);
+            OrderManager.UpdateOrder(idOrder,"Livré");
             return RedirectToAction("ListeDeliverys", "Delivery");
         }
     }

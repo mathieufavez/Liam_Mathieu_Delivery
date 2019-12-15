@@ -30,7 +30,8 @@ namespace WebApplication.Controllers
             List<DTO.Restaurant> listeRestau = RestaurantManager.GetAllRestaurants();
             List<RestaurantCityViewModel> restaurantCity = new List<RestaurantCityViewModel>();
 
-            foreach(DTO.Restaurant r in listeRestau) {
+            foreach(DTO.Restaurant r in listeRestau) 
+            {
                 RestaurantCityViewModel restaurantCityViewModel = new RestaurantCityViewModel();
                 restaurantCityViewModel.Restaurants = r;
                 restaurantCityViewModel.Cities = CityManager.GetCity(r.FK_idCity);

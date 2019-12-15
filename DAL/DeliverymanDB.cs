@@ -237,7 +237,7 @@ namespace DAL
         }
 
 
-        public int GetRightDeliveryman(int idRestaurant, int idCity)
+        public int GetRightDeliveryman(int idCity)
         {
             int result = 0;
 
@@ -245,12 +245,8 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT TOP(1) Deliveryman.Id FROM((Deliveryman "+
-                                    "INNER JOIN Restaurant ON Deliveryman.FK_idCity=@idCity) "+
-                                    "INNER JOIN Delivery ON @idRestaurant = Restaurant.Id) " +
-                                    "GROUP BY Deliveryman.Id HAVING COUNT(Delivery.status) < 5"; 
+                    string query = "SELECT DISTINCT TOP(1) Deliveryman.Id FROM ((Deliveryman INNER JOIN Restaurant ON Deliveryman.FK_idCity=Restaurant.FK_idCity) INNER JOIN Delivery ON Delivery.FK_idRestaurant=Restaurant.Id ) WHERE Deliveryman.FK_idCity=@idCity AND Delivery.status='A livrer' GROUP BY Deliveryman.Id HAVING COUNT(status) < 5";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
                     cmd.Parameters.AddWithValue("@idCity", idCity);
 
                     cn.Open();
