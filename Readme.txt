@@ -21,6 +21,10 @@ Pour faire fonctionne cette application, il vous faudra :
 	Nom d'utilisateur	 = flantier
 	Mot de passe		 = flantier
 
+	Francis Albert :
+	Nom d'utilisateur	 = francis
+	Mot de passe		 = francis
+
 - les identifiants des LIVREURS :
 	Jean-Pierre Perrin :
 	Nom d'utilisateur	 = perrin
