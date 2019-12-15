@@ -20,12 +20,15 @@ namespace WebApplication.Controllers
         }
 
 
+        //Vue affichant les heures de livraisons disponibles que l'utilisateur choisi (tranches de 15 min)
         public ActionResult ChooseDeliveryTime() 
         {
             var delivery_times = Delivery_TimeManager.GetAllDelivery_Time();
             return View(delivery_times);
         }
 
+
+        //Lorsque l'utilisateur choisi l'heure de livraison, redirige sous OrderDetails
         public ActionResult ChoixDelivery_Time(int id) 
         {
             HttpContext.Session.SetInt32("Id_Delivery_time", id);

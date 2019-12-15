@@ -41,6 +41,7 @@ namespace WebApplication.Controllers
       
         }
 
+        //Lorsque le client choisi un restaurant, l'ordre est directement crée et redirige ensuite vers la liste des plats du restaurant en question
         public ActionResult CreateOrder ()
         {
             int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
@@ -52,6 +53,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("ListOrder_Dish", "Order_Dish");
         }
 
+        //Lorsque le client est dans son HomeCustomer, il peut choisir d'afficher toutes les commandes qu'il a effectué. Utilise le modèle OrderDeliveryDelivery_TimeViewModel
         public ActionResult ShowOrder() 
         {
             int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
@@ -70,6 +72,8 @@ namespace WebApplication.Controllers
             return View(orderDeliverytime);
         }
 
+        //Lorsque le client voit tous les ordres qu'il a effectué et qu'il veut en annuler 1, il doit inscrire son code
+        //Cette méthode reprend ce qu'il inscrit
         [HttpGet]
         public IActionResult CancelOrder(int id)
         {
@@ -79,11 +83,13 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        //Méthode qui lit si le code inscrit par le client pour annuler sa commande correspond à son code dans la BD
         [HttpPost]
         public IActionResult CancelOrder(Customer customer)
         {
             int idCustomer = HttpContext.Session.GetInt32("IdCustomer").GetValueOrDefault();
             string code = CustomerManager.Code(idCustomer);
+            //Si ca correspond, la commande et la livraison sont annulée
             if (customer.Code == code) 
             {
                 int idAnnulation = HttpContext.Session.GetInt32("IdAnnulation").GetValueOrDefault();
@@ -94,6 +100,7 @@ namespace WebApplication.Controllers
                 return RedirectToAction("ShowOrder", "Order");
             }
 
+            //Si ca ne correspond pas, redirige sur la même vue
             else
             {
 
@@ -102,6 +109,10 @@ namespace WebApplication.Controllers
           
         }
 
+
+        //Vue complexe utilisant le modèle OrderDetailsViewModel
+        //Permet d'afficher le nom du restaurant de la commande, le numéro de la commande, les plats choisis (bug, 1 seul plat est affiché), 
+        //la quantité par plats, le prix unitaire d'un plat, l'heure de livraison...
         public ActionResult OrderDetails() 
         {
             List<OrderDetailsViewModel> listeOrderDetails = new List<OrderDetailsViewModel>();
@@ -137,11 +148,16 @@ namespace WebApplication.Controllers
 
         }
 
+        //Après avoir vu les détails de sa commande, le client choisit de valider
+        //Redirige vers DeliveryControlleur pour créer la livraison
         public ActionResult Valider()
         {
 
             return RedirectToAction("CreateDelivery","Delivery");
         }
+
+        //Après avoir vu les détails de sa commande, le client choisit de l'annuler
+        //Change le statut de l'ordre en annulé et retourne la vue comme quoi ca a bien été annulé
         public ActionResult Annuler() 
         {
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();

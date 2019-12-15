@@ -32,6 +32,7 @@ namespace WebApplication.Controllers
             CityManager = cityManager;
         }
 
+        //Vue affichant la liste des livraisons affilié à un livreur avec modele DeliveryDetailsViewModel
         public ActionResult ListeDeliverys(int idDeliveryman) 
         {
             List<DeliveryDetailsViewModel> listeDelivery = new List<DeliveryDetailsViewModel>();
@@ -53,6 +54,9 @@ namespace WebApplication.Controllers
             return View(listeDelivery);
         }
 
+
+        //Lorsque l'utilisateur valide sa commande, la livraison est crée. Recherche le deliveryman adapté (même ville que restaurant) et
+        //pas plus de 5 livraisons avec status "A livrer" (Tranche de 30 minutes pas réussi)
         public ActionResult CreateDelivery()
         {
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
@@ -65,28 +69,36 @@ namespace WebApplication.Controllers
 
             int idRightDeliveryman = DeliverymanManager.GetRightDeliveryman(idCity);
             
+            //Si la méthode ne trouve aucun livreur disponible, renvoie sur la page NoDeliverymanAvailable
             if (idRightDeliveryman == 0)
             {
                 return RedirectToAction("NoDeliverymanAvailable", "Delivery");
             }
             else
             {
+                //Si la méthode trôuve un livreur, insertion dans la livraison de son ID
+                //Redirige vers la page de confirmation de la livraison
                 DeliveryManager.UpdateDelivery( newDelivery.IdDelivery ,idRightDeliveryman);
                 return RedirectToAction("DeliveryConfirmed", "Delivery");
             }
         }
 
+        //Vue indiquant qu'aucun livreur n'est disponible
         public ActionResult NoDeliverymanAvailable() 
         {
 
             return View();
         }
 
+        //Vue indiquant que la livraison est confirmée
         public ActionResult DeliveryConfirmed()
         {
             return View();
         }
 
+
+        //Lorsqu'un livreur a effectué une livraison, le statut de la livraison passe de "A livrer" à "Effectué" et le statut de l'ordre correspondant passe de "En cours" à "Livré"
+        //Redirige vers la liste des livraisons du livreur
         public ActionResult DeliveryDone(int id, int idOrder) 
         {
             string status = "Effectué";

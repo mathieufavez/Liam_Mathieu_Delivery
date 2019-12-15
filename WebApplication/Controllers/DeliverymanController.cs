@@ -23,29 +23,33 @@ namespace WebApplication.Controllers
             CityManager = cityManager;
         }
 
-
+        //Vue pour que le livreur insère son login et mot de passe
         [HttpGet]
         public IActionResult Connexion()
         {
             return View();
         }
 
+        //Reprend les insertions du livreur et regarde si cela correspond à la BD
         [HttpPost]
         public IActionResult Connexion(Deliveryman deliveryman)
         {
             int idDeliveryman = DeliverymanManager.GetIdDeliveryman(deliveryman.Login);
             string password = DeliverymanManager.GetPassword(idDeliveryman, deliveryman.Login);
+            //Si ca correspond, passe à la vue HomeDeliveryman
             if (deliveryman.Password == password)
             {
                 HttpContext.Session.SetInt32("IdDeliveryman", idDeliveryman);
                 return RedirectToAction("HomeDeliveryman", "Deliveryman", new { id = idDeliveryman });
             }
+            //Si ca ne correspond pas, reste sur la connexion
             else
             {
                 return View();
             }
         }
 
+        //Accueil livreur, affiche son nom et son adresse via le Modele DeliverymanCityViewModel
         public ActionResult HomeDeliveryman()
         {
             int idDeliveryman = HttpContext.Session.GetInt32("IdDeliveryman").GetValueOrDefault();
@@ -60,6 +64,7 @@ namespace WebApplication.Controllers
             return View(deliverymanCity);
         }
 
+        //Quand le livreur clique sur le bouton afficher les livraisons, il arrive ici qui renvoie sous DeliveryController pour la liste des livraisons
         public ActionResult ShowDeliverys()
         {
 

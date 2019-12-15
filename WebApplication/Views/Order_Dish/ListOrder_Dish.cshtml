@@ -1,5 +1,14 @@
 ﻿@model IEnumerable<DishOrderDishViewModel>
 
+    <--!>
+       Panier du client pour une commande
+        Total fait ici pour que le client ait un aperçu du prix qu'il devra payer
+        Bouton ajouter un plat
+        Bouton continuer (et choisir heure de livraison)
+        Bouton retour en arrière
+        Bouton pour supprimer ce qu'on a ajouté au panier pour cette commande
+    </--!>
+
 @{
     ViewData["Title"] = "Liste des plats commandés";
     int somme = 0;
@@ -60,7 +69,7 @@
     </tbody>
 </table>
 
-<p>@Html.ActionLink("Ajouter un plat", "AddDish", new { /*  id=item.PrimaryKey */ })</p>
+<p>@Html.ActionLink("Ajouter un plat", "AddDish")</p>
 
 @foreach (var item in Model)
 {

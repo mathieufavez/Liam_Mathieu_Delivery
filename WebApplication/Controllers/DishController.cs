@@ -18,7 +18,7 @@ namespace WebApplication.Controllers
             DishManager = dishManager;
         }
         
-        // GET: AllDishes for a restaurant
+        //Retourne la vue des plats pour un restaurant choisi
         public ActionResult ListeDishes()
         {
             int idRestaurant = HttpContext.Session.GetInt32("IdRestaurant").GetValueOrDefault();
@@ -26,6 +26,7 @@ namespace WebApplication.Controllers
             return View(dishes);
         }
 
+        //Lorsque le client choisi son plat, le renvoie sur la page pour choisir la quantité sous le controlleur Order_Dish
         public ActionResult Choix(int id, int price) 
         {
             HttpContext.Session.SetInt32("DishPrice", price);

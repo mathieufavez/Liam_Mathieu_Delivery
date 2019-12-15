@@ -21,6 +21,9 @@ namespace WebApplication.Controllers
             DishManager = dishManager;
         }
 
+        //Vue affichant le "panier", le client arrive sur cette page et choisi d'ajouter un plat, qui va être affiché avec la quantité qu'il a choisi
+        //Affiche ensuite le total de la commande actuelle 
+        //Il peut ajouter autant de plats qu'il veut
         public ActionResult ListOrder_Dish()
         {
             int idOrder = HttpContext.Session.GetInt32("IdOrder").GetValueOrDefault();
@@ -36,12 +39,14 @@ namespace WebApplication.Controllers
             return View(dishOrderDish);
         }
 
+        //Lorsque le client clique sur ajouter un plat, il est redirigé vers la liste des plats
         public ActionResult AddDish()
         {
-            //Remontrer la vue avec les order DIsh choisis
+            
             return RedirectToAction("ListeDishes", "Dish");
         }
 
+        //Lorsque le client a choisi son plat et la quantité, l'order_dish est crée et retourne la vue liste des Order_dish
         public ActionResult CreateOrder_Dish()
         {
             int quantite = HttpContext.Session.GetInt32("Quantite").GetValueOrDefault();
@@ -55,17 +60,20 @@ namespace WebApplication.Controllers
             return RedirectToAction("ListOrder_Dish", "Order_Dish");
         }
 
+        //Lorsque le client choisi son heure, il est redirigé vers le controlleur Delivery_time
         public ActionResult ChooseDeliveryTime() 
         {
             return RedirectToAction("ChooseDeliveryTime","Delivery_Time");
         }
 
+        //Le client indique combien de quantité il veut
         [HttpGet]
         public IActionResult GetQuantity()
         {
             return View();
         }
 
+        //Reprend la quantité choisi par le client et redirige vers CreateOrder_Dish
        [HttpPost]
         public IActionResult GetQuantity(DTO.Order_Dish order_dish)
         {
@@ -73,6 +81,8 @@ namespace WebApplication.Controllers
             return RedirectToAction("CreateOrder_Dish","Order_Dish");
         }
 
+        //Si un client a choisi un plat et ne le veut plus, il peut le supprimer pour qu'il ne soit pas sur sa commande
+        //Redirige vers la listeOrder_Dish
         public ActionResult DeleteOrder_Dish(int idOrder_Dish) 
         {
             Order_DishManager.DeleteOrder_Dish(idOrder_Dish);
